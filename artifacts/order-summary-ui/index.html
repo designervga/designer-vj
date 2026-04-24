@@ -43,10 +43,6 @@
     }
 
     .topbar {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 24px;
       margin-bottom: 22px;
     }
 
@@ -72,18 +68,6 @@
       color: var(--muted);
       font-size: 15px;
       line-height: 1.55;
-    }
-
-    .status {
-      flex: 0 0 auto;
-      padding: 10px 12px;
-      border: 1px solid #cfe1ff;
-      border-radius: var(--radius);
-      background: var(--soft-blue);
-      color: #064aa2;
-      font-size: 13px;
-      font-weight: 800;
-      white-space: nowrap;
     }
 
     .workspace {
@@ -510,18 +494,8 @@
     }
 
     @media (max-width: 980px) {
-      .workspace,
-      .topbar {
+      .workspace {
         grid-template-columns: 1fr;
-      }
-
-      .topbar {
-        display: block;
-      }
-
-      .status {
-        display: inline-block;
-        margin-top: 14px;
       }
 
       .prototype-column {
@@ -670,7 +644,6 @@
         <h1>Resumen de pedido sin redundancia visual</h1>
         <p class="summary">La propuesta mantiene el total siempre visible, pero cambia dónde aparece según el estado del componente. Cerrado funciona como resumen. Abierto funciona como detalle.</p>
       </div>
-      <div class="status">Prototipo funcional incluido</div>
     </header>
 
     <section class="workspace">
