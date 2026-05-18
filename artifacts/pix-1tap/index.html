@@ -292,7 +292,7 @@
 
     <header class="hero">
       <div class="hero-copy">
-        <div class="eyebrow">Pix logueado no fast path</div>
+        <div class="eyebrow">Pix para buyers logados</div>
         <h1>Pix 1-Tap</h1>
         <p class="lede">Confirmar um Pix com biometria, dentro do checkout, sem sair para o app do banco. Para o consumer logueado em Wallet em loja com Nuvem Pago.</p>
       </div>
@@ -321,7 +321,7 @@
           </ol>
         </article>
         <article class="card">
-          <span class="tag">Enrollment · uma vez</span>
+          <span class="tag">Vínculo · uma vez</span>
           <h3>Vincular o banco</h3>
           <ol class="steps">
             <li>Toca em Pix 1-Tap</li>
@@ -336,7 +336,7 @@
           <ol class="steps">
             <li>Seleciona Pix 1-Tap</li>
             <li>Confirma com biometria</li>
-            <li>Nuvem Pago aciona o partner ITP</li>
+            <li>Nuvem Pago aciona o parceiro ITP</li>
             <li>Pedido pago, sem sair do checkout</li>
           </ol>
         </article>
@@ -346,11 +346,11 @@
     <section>
       <div class="section-head">
         <span class="eyebrow">Quem faz o quê</span>
-        <h2>Nuvem Pago orquestra, Wallet conduz a experiência</h2>
-        <p>Hipótese principal para v1. Wallet entrega identidade, consentimento e fallback no checkout. Nuvem Pago coordena o fluxo de pagamento e precisaria operar com um partner ITP para iniciação regulatória, biometria e comunicação com o banco.</p>
+        <h2>Nuvem Pago coordena o pagamento, Wallet conduz a experiência</h2>
+        <p>Hipótese principal para v1. Wallet entrega identidade, consentimento e recuperação no checkout. Nuvem Pago coordena o fluxo de pagamento e precisa validar o caminho regulatório: operar com um parceiro ITP ou assumir esse papel no futuro.</p>
       </div>
       <div class="flow-wrap">
-        <svg class="flow-svg" viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fluxo Pix 1-Tap: Consumer, Checkout, Nuvem Pago como orquestrador, Partner ITP e banco, Order status, com Wallet como camada de UX">
+        <svg class="flow-svg" viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fluxo Pix 1-Tap: Consumer, Checkout, Nuvem Pago como coordenador do pagamento, parceiro ITP e banco, status do pedido, com Wallet como camada de experiência">
           <defs>
             <marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
               <path d="M0,0 L10,5 L0,10 z" fill="#5e616b"/>
@@ -360,7 +360,7 @@
           <!-- Wallet / UX umbrella -->
           <rect x="20" y="20" width="1040" height="56" rx="14" fill="#eef4ff" stroke="#2864e8" stroke-opacity="0.35" stroke-width="1.5"/>
           <text x="540" y="44" text-anchor="middle" fill="#0050c3" font-family="Plus Jakarta Sans, sans-serif" font-weight="900" font-size="12" letter-spacing="0.08em">NUVEM · WALLET</text>
-          <text x="540" y="62" text-anchor="middle" fill="#0b0d12" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="13">identidade · consentimento · UX cross-store · fallback no checkout</text>
+          <text x="540" y="62" text-anchor="middle" fill="#0b0d12" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="13">identidade · consentimento · experiência entre lojas · recuperação no checkout</text>
 
           <!-- Connector from umbrella to row -->
           <path d="M 540 76 L 540 110" stroke="#2864e8" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/>
@@ -383,15 +383,15 @@
 
             <!-- Nuvem Pago - payment orchestration -->
             <rect x="570" y="120" width="220" height="86" rx="14" fill="#e6f9f6" stroke="#15b8a6" stroke-width="2"/>
-            <text x="680" y="146" text-anchor="middle" fill="#08796d" font-weight="900" font-size="11" letter-spacing="0.08em">ORQUESTRAÇÃO</text>
+            <text x="680" y="146" text-anchor="middle" fill="#08796d" font-weight="900" font-size="11" letter-spacing="0.08em">COORDENAÇÃO</text>
             <text x="680" y="170" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="15">Nuvem Pago</text>
-            <text x="680" y="190" text-anchor="middle" fill="#08796d" font-weight="600" font-size="12">coordena Pix + settlement</text>
+            <text x="680" y="190" text-anchor="middle" fill="#08796d" font-weight="600" font-size="12">coordena pagamento + liquidação</text>
 
             <path d="M 790 163 L 840 163" stroke="#5e616b" stroke-width="2" marker-end="url(#arr1)" fill="none"/>
 
-            <!-- Partner ITP / Banco -->
+            <!-- Parceiro ITP / Banco -->
             <rect x="845" y="120" width="215" height="86" rx="14" fill="#ffffff" stroke="#d9e3f3" stroke-width="1.5"/>
-            <text x="952" y="156" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="15">Partner ITP + Banco</text>
+            <text x="952" y="156" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="15">Parceiro ITP + Banco</text>
             <text x="952" y="178" text-anchor="middle" fill="#5e616b" font-weight="600" font-size="12">iniciação + biometria</text>
 
             <!-- Return arc: bank -> nuvem pago -->
@@ -400,8 +400,8 @@
 
             <!-- Order status -->
             <rect x="295" y="280" width="220" height="80" rx="14" fill="#ffffff" stroke="#d9e3f3" stroke-width="1.5"/>
-            <text x="405" y="312" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="15">Order status</text>
-            <text x="405" y="332" text-anchor="middle" fill="#5e616b" font-weight="600" font-size="12">comprovante + settlement</text>
+            <text x="405" y="312" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="15">Status do pedido</text>
+            <text x="405" y="332" text-anchor="middle" fill="#5e616b" font-weight="600" font-size="12">comprovante + liquidação</text>
 
             <!-- Nuvem Pago -> Order (down/left curve) -->
             <path d="M 620 206 C 620 250, 460 250, 415 280" stroke="#5e616b" stroke-width="2" marker-end="url(#arr1)" fill="none"/>
@@ -416,12 +416,12 @@
 
     <section>
       <div class="section-head">
-        <span class="eyebrow">Decisão de fluxo</span>
-        <h2>Elegibilidade, enrollment e fallback</h2>
-        <p>Pix 1-Tap só aparece quando todas as condições batem. Em qualquer falha, o Pix convencional segue como fallback permanente.</p>
+        <span class="eyebrow">Quando aparece</span>
+        <h2>Pix 1-Tap só aparece quando tudo está elegível</h2>
+        <p>Se loja, banco, aparelho, valor ou vínculo não forem elegíveis, o checkout mantém Pix convencional.</p>
       </div>
       <div class="flow-wrap">
-        <svg class="flow-svg" viewBox="0 0 1080 740" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Decisão de fluxo: elegibilidade, enrollment, biometria, reconciliação e fallback">
+        <svg class="flow-svg" viewBox="0 0 1080 740" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Quando Pix 1-Tap aparece: elegibilidade, vínculo do banco, biometria, confirmação e volta para Pix convencional">
           <defs>
             <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
               <path d="M0,0 L10,5 L0,10 z" fill="#5e616b"/>
@@ -437,7 +437,7 @@
 
             <!-- Diamond 1: elegível -->
             <polygon points="540,118 740,182 540,246 340,182" fill="#ffffff" stroke="#5e616b" stroke-width="1.8"/>
-            <text x="540" y="174" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="13">Loja, banco, device</text>
+            <text x="540" y="174" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="13">Loja, banco, aparelho</text>
             <text x="540" y="194" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="13">e valor elegíveis?</text>
 
             <!-- Sim down -->
@@ -451,7 +451,7 @@
             <!-- Fallback box (right column, full height marker) -->
             <rect x="865" y="148" width="195" height="72" rx="14" fill="#fff1f4" stroke="#e44778" stroke-width="1.5"/>
             <text x="962" y="180" text-anchor="middle" fill="#b32a55" font-weight="900" font-size="14">Pix convencional</text>
-            <text x="962" y="200" text-anchor="middle" fill="#b32a55" font-weight="700" font-size="12">fallback permanente</text>
+            <text x="962" y="200" text-anchor="middle" fill="#b32a55" font-weight="700" font-size="12">opção permanente</text>
 
             <!-- Show Pix 1-Tap -->
             <rect x="430" y="280" width="220" height="60" rx="14" fill="#ffffff" stroke="#d9e3f3" stroke-width="1.5"/>
@@ -470,7 +470,7 @@
 
             <rect x="40" y="408" width="200" height="60" rx="14" fill="#ffffff" stroke="#2864e8" stroke-width="1.5"/>
             <text x="140" y="436" text-anchor="middle" fill="#0050c3" font-weight="900" font-size="13">Vincular banco</text>
-            <text x="140" y="454" text-anchor="middle" fill="#5e616b" font-weight="600" font-size="11">enrollment, uma vez</text>
+            <text x="140" y="454" text-anchor="middle" fill="#5e616b" font-weight="600" font-size="11">vínculo, uma vez</text>
 
             <!-- Vincular banco -> Confirmar biometria (down and right) -->
             <path d="M 140 468 L 140 540 L 430 540" stroke="#5e616b" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
@@ -482,7 +482,7 @@
             <!-- Confirmar biometria -->
             <rect x="430" y="530" width="220" height="64" rx="14" fill="#e6f9f6" stroke="#15b8a6" stroke-width="1.8"/>
             <text x="540" y="558" text-anchor="middle" fill="#08796d" font-weight="900" font-size="14">Confirmar com biometria</text>
-            <text x="540" y="578" text-anchor="middle" fill="#08796d" font-weight="600" font-size="12">FIDO2 do device</text>
+            <text x="540" y="578" text-anchor="middle" fill="#08796d" font-weight="600" font-size="12">biometria do aparelho</text>
 
             <path d="M 540 594 L 540 620" stroke="#5e616b" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
 
@@ -497,7 +497,7 @@
 
             <rect x="865" y="648" width="195" height="64" rx="14" fill="#fff1f4" stroke="#e44778" stroke-width="1.5"/>
             <text x="962" y="676" text-anchor="middle" fill="#b32a55" font-weight="900" font-size="14">Pix convencional</text>
-            <text x="962" y="696" text-anchor="middle" fill="#b32a55" font-weight="700" font-size="12">fallback permanente</text>
+            <text x="962" y="696" text-anchor="middle" fill="#b32a55" font-weight="700" font-size="12">opção permanente</text>
 
             <!-- Sim left -> success -->
             <path d="M 340 680 L 240 680" stroke="#5e616b" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
@@ -512,20 +512,20 @@
 
     <section>
       <div class="section-head">
-        <span class="eyebrow">Por que agora</span>
-        <h2>O volume já está no nosso fast path</h2>
-        <p>Baseline interno Wallet, fev–abr/2026. Pix é a parte mais pesada do volume logado em BR, e a maior fatia já passa por Nuvem Pago.</p>
+        <span class="eyebrow">Tamanho da oportunidade</span>
+        <h2>Quase metade dos pedidos logados é Pix, e 71% desse Pix passa por Nuvem Pago</h2>
+        <p>Baseline interno Wallet, BR, fev-abr/2026. Pix concentrou 46,1% dos pedidos pagos logados, e 71,0% desse Pix passou por Nuvem Pago.</p>
       </div>
       <div class="grid-stats">
         <div class="stat">
           <div class="num">46,1%</div>
-          <div class="label">do volume logado em Wallet é Pix</div>
-          <div class="sub">Pedidos pagos logados, Brasil</div>
+          <div class="label">dos pedidos pagos logados foram Pix</div>
+          <div class="sub">Wallet, Brasil, fev-abr/2026</div>
         </div>
         <div class="stat">
           <div class="num">71,0%</div>
-          <div class="label">do Pix logado passa por Nuvem Pago</div>
-          <div class="sub">Compartilhamento dentro do Pix logado em Wallet</div>
+          <div class="label">do Pix logado passou por Nuvem Pago</div>
+          <div class="sub">Participação de Nuvem Pago dentro do Pix logado em Wallet</div>
         </div>
         <div class="stat">
           <div class="num">10,6%</div>
