@@ -336,7 +336,7 @@
           <ol class="steps">
             <li>Seleciona Pix 1-Tap</li>
             <li>Confirma com biometria</li>
-            <li>Nuvem Pago inicia o Pix</li>
+            <li>Nuvem Pago aciona o partner ITP</li>
             <li>Pedido pago, sem sair do checkout</li>
           </ol>
         </article>
@@ -346,11 +346,11 @@
     <section>
       <div class="section-head">
         <span class="eyebrow">Quem faz o quê</span>
-        <h2>Nuvem Pago inicia, Wallet conduz a experiência</h2>
-        <p>Hipótese principal para v1. Nuvem Pago é o iniciador de pagamento. Wallet entrega identidade, consentimento e fallback. Cobertura por banco, device e valor entram por trilha de elegibilidade.</p>
+        <h2>Nuvem Pago orquestra, Wallet conduz a experiência</h2>
+        <p>Hipótese principal para v1. Wallet entrega identidade, consentimento e fallback no checkout. Nuvem Pago coordena o fluxo de pagamento e precisaria operar com um partner ITP para iniciação regulatória, biometria e comunicação com o banco.</p>
       </div>
       <div class="flow-wrap">
-        <svg class="flow-svg" viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fluxo Pix 1-Tap: Consumer, Checkout, Nuvem Pago como iniciador, Banco/ITP, Order status, com Wallet como camada de UX">
+        <svg class="flow-svg" viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fluxo Pix 1-Tap: Consumer, Checkout, Nuvem Pago como orquestrador, Partner ITP e banco, Order status, com Wallet como camada de UX">
           <defs>
             <marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
               <path d="M0,0 L10,5 L0,10 z" fill="#5e616b"/>
@@ -381,22 +381,22 @@
 
             <path d="M 515 163 L 565 163" stroke="#5e616b" stroke-width="2" marker-end="url(#arr1)" fill="none"/>
 
-            <!-- Nuvem Pago - highlighted as ITP -->
+            <!-- Nuvem Pago - payment orchestration -->
             <rect x="570" y="120" width="220" height="86" rx="14" fill="#e6f9f6" stroke="#15b8a6" stroke-width="2"/>
-            <text x="680" y="146" text-anchor="middle" fill="#08796d" font-weight="900" font-size="11" letter-spacing="0.08em">ITP · RECEBEDOR</text>
+            <text x="680" y="146" text-anchor="middle" fill="#08796d" font-weight="900" font-size="11" letter-spacing="0.08em">ORQUESTRAÇÃO</text>
             <text x="680" y="170" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="15">Nuvem Pago</text>
-            <text x="680" y="190" text-anchor="middle" fill="#08796d" font-weight="600" font-size="12">inicia o Pix via Open Finance</text>
+            <text x="680" y="190" text-anchor="middle" fill="#08796d" font-weight="600" font-size="12">coordena Pix + settlement</text>
 
             <path d="M 790 163 L 840 163" stroke="#5e616b" stroke-width="2" marker-end="url(#arr1)" fill="none"/>
 
-            <!-- Banco / Partner ITP -->
+            <!-- Partner ITP / Banco -->
             <rect x="845" y="120" width="215" height="86" rx="14" fill="#ffffff" stroke="#d9e3f3" stroke-width="1.5"/>
-            <text x="952" y="156" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="15">Banco · Partner ITP</text>
-            <text x="952" y="178" text-anchor="middle" fill="#5e616b" font-weight="600" font-size="12">consentimento + biometria</text>
+            <text x="952" y="156" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="15">Partner ITP + Banco</text>
+            <text x="952" y="178" text-anchor="middle" fill="#5e616b" font-weight="600" font-size="12">iniciação + biometria</text>
 
             <!-- Return arc: bank -> nuvem pago -->
             <path d="M 952 206 C 952 250, 680 250, 680 220" stroke="#5e616b" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr1)" fill="none"/>
-            <text x="816" y="270" text-anchor="middle" fill="#5e616b" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="12" font-style="italic">autorização do pagamento</text>
+            <text x="816" y="270" text-anchor="middle" fill="#5e616b" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="12" font-style="italic">autorização + confirmação</text>
 
             <!-- Order status -->
             <rect x="295" y="280" width="220" height="80" rx="14" fill="#ffffff" stroke="#d9e3f3" stroke-width="1.5"/>
