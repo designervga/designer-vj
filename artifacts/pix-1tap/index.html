@@ -52,6 +52,7 @@
       border-radius: 24px;
       box-shadow: 0 24px 60px rgb(0 80 195 / 6%);
     }
+    .hero-copy { transform: translateY(-18px); }
     .hero h1 {
       margin: 12px 0 14px;
       font-size: 52px;
@@ -70,8 +71,7 @@
     .video-frame {
       position: relative;
       margin: 0 auto;
-      width: 100%;
-      max-width: 360px;
+      width: min(100%, 380px);
       aspect-ratio: 9 / 16;
       border-radius: 36px;
       overflow: hidden;
@@ -204,9 +204,20 @@
     /* Responsive */
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; padding: 24px; }
+      .hero-copy { transform: none; }
       .hero h1 { font-size: 36px; }
       .grid-3, .grid-stats { grid-template-columns: 1fr; }
       .wrap { padding: 24px 16px 56px; }
+    }
+    @media (max-width: 480px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 18px;
+      }
+      .hero { padding: 22px; }
+      .video-frame { border-radius: 28px; }
     }
   </style>
 
@@ -276,11 +287,11 @@
 
     <div class="topbar">
       <div class="eyebrow">Wallet · Q3 2026</div>
-      <div class="meta">Draft · 1-pager interno</div>
+      <div class="meta">One-pager interno</div>
     </div>
 
     <header class="hero">
-      <div>
+      <div class="hero-copy">
         <div class="eyebrow">Pix logueado no fast path</div>
         <h1>Pix 1-Tap</h1>
         <p class="lede">Confirmar um Pix com biometria, dentro do checkout, sem sair para o app do banco. Para o consumer logueado em Wallet em loja com Nuvem Pago.</p>
@@ -295,7 +306,7 @@
     <section>
       <div class="section-head">
         <span class="eyebrow">Como muda</span>
-        <h2>De copiar e colar para um toque com biometria</h2>
+        <h2>De copiar código para confirmar com biometria</h2>
         <p>Hoje o consumer sai do checkout para pagar. Com Pix 1-Tap, confirma direto, sem redirect.</p>
       </div>
       <div class="grid-3">
