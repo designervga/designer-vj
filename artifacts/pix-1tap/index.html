@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pix 1-Tap · Wallet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #2864e8;
+      --blue-dark: #0050c3;
+      --ink: #0b0d12;
+      --ink-2: #17181c;
+      --muted: #5e616b;
+      --muted-2: #8b8f99;
+      --line: #e3eaf5;
+      --line-2: #d9e3f3;
+      --bg: #f6fbff;
+      --surface: #ffffff;
+      --teal: #15b8a6;
+      --teal-dark: #08796d;
+      --pink: #e44778;
+      --font: "Plus Jakarta Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "ss01";
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 40px 28px 80px; }
+
+    /* Header */
+    .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+    .eyebrow { color: var(--blue-dark); font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+    .meta { color: var(--muted-2); font-size: 12px; font-weight: 700; }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 36px;
+      align-items: center;
+      padding: 32px 36px;
+      background: linear-gradient(135deg, #ffffff 0%, #f1f7ff 60%, #e8f3ff 100%);
+      border: 1px solid rgb(0 80 195 / 12%);
+      border-radius: 24px;
+      box-shadow: 0 24px 60px rgb(0 80 195 / 6%);
+    }
+    .hero h1 {
+      margin: 12px 0 14px;
+      font-size: 52px;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      font-weight: 950;
+    }
+    .hero .lede {
+      font-size: 18px;
+      line-height: 1.45;
+      color: var(--muted);
+      font-weight: 600;
+      max-width: 520px;
+    }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--line-2);
+      color: var(--ink-2);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .pill.ok { background: rgb(21 184 166 / 10%); border-color: rgb(21 184 166 / 30%); color: var(--teal-dark); }
+    .pill.blue { background: rgb(40 100 232 / 8%); border-color: rgb(40 100 232 / 28%); color: var(--blue-dark); }
+
+    /* Video frame */
+    .video-frame {
+      position: relative;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 9 / 16;
+      border-radius: 36px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 30px 70px rgb(0 0 0 / 18%), 0 0 0 8px #ffffff, 0 0 0 9px var(--line-2);
+    }
+    .video-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Section */
+    section { margin-top: 56px; }
+    .section-head { margin-bottom: 22px; }
+    .section-head .eyebrow { display: block; margin-bottom: 6px; }
+    .section-head h2 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.1;
+      letter-spacing: -0.005em;
+      font-weight: 950;
+    }
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 500;
+      max-width: 760px;
+    }
+
+    /* Three states */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 8px 24px rgb(15 30 70 / 4%);
+    }
+    .card .tag {
+      align-self: flex-start;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #eef4ff;
+      color: var(--blue-dark);
+    }
+    .card.now .tag { background: #fff1f4; color: #b32a55; }
+    .card.next .tag { background: rgb(21 184 166 / 12%); color: var(--teal-dark); }
+    .card h3 { margin: 4px 0 0; font-size: 19px; line-height: 1.2; font-weight: 900; }
+    .card p { margin: 4px 0 0; color: var(--muted); font-size: 14px; line-height: 1.45; font-weight: 500; }
+    .card .steps { margin: 8px 0 0; padding: 0; list-style: none; counter-reset: step; }
+    .card .steps li {
+      counter-increment: step;
+      position: relative;
+      padding: 6px 0 6px 26px;
+      font-size: 13.5px;
+      color: var(--ink-2);
+      font-weight: 600;
+      line-height: 1.35;
+      border-bottom: 1px dashed var(--line);
+    }
+    .card .steps li:last-child { border-bottom: none; }
+    .card .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0; top: 8px;
+      width: 18px; height: 18px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 999px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+    }
+    .card.next .steps li::before { background: var(--teal); }
+
+    /* Flow diagram */
+    .flow-wrap {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px 24px;
+      box-shadow: 0 8px 24px rgb(15 30 70 / 4%);
+    }
+    .flow-svg { display: block; width: 100%; height: auto; }
+
+    /* Stats */
+    .grid-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .stat {
+      background: linear-gradient(180deg, #ffffff 0%, #f4faff 100%);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px 22px 20px;
+    }
+    .stat .num {
+      font-size: 46px;
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: -0.02em;
+      color: var(--blue-dark);
+    }
+    .stat .label { margin-top: 8px; color: var(--ink-2); font-size: 14px; font-weight: 800; }
+    .stat .sub { margin-top: 4px; color: var(--muted); font-size: 13px; font-weight: 500; line-height: 1.4; }
+
+    /* Footer */
+    footer {
+      margin-top: 64px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted-2);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 24px; }
+      .hero h1 { font-size: 36px; }
+      .grid-3, .grid-stats { grid-template-columns: 1fr; }
+      .wrap { padding: 24px 16px 56px; }
+    }
+  </style>
+
+<style>
+  .vj-protected-content { display: none; }
+  body.vj-unlocked .vj-protected-content { display: block; }
+  body.vj-unlocked .vj-lock { display: none; }
+  .vj-lock {
+    min-height: 100vh; display: grid; place-items: center; padding: 24px;
+    background: #eef3f8; color: #111827;
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  .vj-lock-card {
+    width: min(100%, 380px); background: #fff; border: 1px solid #d8dee8;
+    border-radius: 10px; padding: 22px;
+    box-shadow: 0 16px 40px rgba(17,24,39,0.1);
+  }
+  .vj-lock-card h1 { margin: 0 0 8px; font-size: 22px; line-height: 1.2; letter-spacing: 0; }
+  .vj-lock-card p { margin: 0 0 16px; color: #667085; font-size: 14px; line-height: 1.5; }
+  .vj-lock-form { display: grid; gap: 10px; }
+  .vj-lock-form input { height: 44px; border: 1px solid #d8dee8; border-radius: 8px; padding: 0 12px; font: inherit; }
+  .vj-lock-form button { height: 44px; border: 0; border-radius: 8px; background: #0066e5; color: #fff; font: inherit; font-weight: 800; cursor: pointer; }
+  .vj-lock-error { min-height: 18px; color: #b42318; font-size: 12px; font-weight: 700; }
+</style>
+
+</head>
+<body>
+
+<section class="vj-lock" aria-label="Protected page">
+  <form class="vj-lock-card vj-lock-form" data-vj-lock>
+    <h1>Pix 1-Tap · Wallet</h1>
+    <p>Digite a senha para ver este material.</p>
+    <input type="password" autocomplete="current-password" placeholder="Senha" aria-label="Senha" data-vj-password>
+    <button type="submit">Entrar</button>
+    <div class="vj-lock-error" data-vj-error></div>
+  </form>
+</section>
+<script>
+(() => {
+  const expected = "3bb534922618f14b978bd59c9d98802604a69587847f610f3b0efe1a560f43d0";
+  const key = "designer-vj-auth";
+  const enc = new TextEncoder();
+  const toHex = buffer => Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+  const unlock = () => document.body.classList.add("vj-unlocked");
+  if (sessionStorage.getItem(key) === expected) unlock();
+  document.querySelector("[data-vj-lock]")?.addEventListener("submit", async event => {
+    event.preventDefault();
+    const input = document.querySelector("[data-vj-password]");
+    const error = document.querySelector("[data-vj-error]");
+    const digest = await crypto.subtle.digest("SHA-256", enc.encode(input.value));
+    const actual = toHex(digest);
+    if (actual === expected) {
+      sessionStorage.setItem(key, expected);
+      unlock();
+      input.value = "";
+    } else {
+      error.textContent = "Senha incorreta.";
+      input.select();
+    }
+  });
+})();
+</script>
+
+<div class="vj-protected-content">
+
+  <div class="wrap">
+
+    <div class="topbar">
+      <div class="eyebrow">Wallet · Q3 2026</div>
+      <div class="meta">Draft · 1-pager interno</div>
+    </div>
+
+    <header class="hero">
+      <div>
+        <div class="eyebrow">Pix logueado no fast path</div>
+        <h1>Pix 1-Tap</h1>
+        <p class="lede">Confirmar um Pix com biometria, dentro do checkout, sem sair para o app do banco. Para o consumer logueado em Wallet em loja com Nuvem Pago.</p>
+        <div class="pills">
+          <span class="pill blue">Brasil</span>
+          <span class="pill blue">Wallet + Nuvem Pago</span>
+          <span class="pill ok">JSR / Resolução BCB nº 406</span>
+        </div>
+      </div>
+      <div class="video-frame">
+        <video autoplay loop muted playsinline preload="metadata" poster="">
+          <source src="assets/pix-1tap-happy-path.mp4" type="video/mp4">
+        </video>
+      </div>
+    </header>
+
+    <section>
+      <div class="section-head">
+        <span class="eyebrow">Como muda</span>
+        <h2>De copiar e colar para um toque com biometria</h2>
+        <p>Hoje o consumer sai do checkout para pagar. Com Pix 1-Tap, confirma direto, sem redirect.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card now">
+          <span class="tag">Hoje · Pix convencional</span>
+          <h3>Sair, copiar, voltar</h3>
+          <ol class="steps">
+            <li>Escolhe Pix no checkout</li>
+            <li>Copia código ou QR</li>
+            <li>Abre o app do banco</li>
+            <li>Cola, confirma, volta</li>
+          </ol>
+        </article>
+        <article class="card">
+          <span class="tag">Enrollment · uma vez</span>
+          <h3>Vincular o banco</h3>
+          <ol class="steps">
+            <li>Toca em Pix 1-Tap</li>
+            <li>Escolhe o banco</li>
+            <li>Autoriza no banco</li>
+            <li>Pronto para próximas compras</li>
+          </ol>
+        </article>
+        <article class="card next">
+          <span class="tag">Pix 1-Tap · pagamento</span>
+          <h3>Um toque com biometria</h3>
+          <ol class="steps">
+            <li>Seleciona Pix 1-Tap</li>
+            <li>Confirma com biometria</li>
+            <li>Nuvem Pago inicia o Pix</li>
+            <li>Pedido pago, sem sair do checkout</li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <span class="eyebrow">Quem faz o quê</span>
+        <h2>Nuvem Pago inicia, Wallet conduz a experiência</h2>
+        <p>Hipótese principal para v1. Nuvem Pago é o iniciador de pagamento. Wallet entrega identidade, consentimento e fallback. Cobertura por banco, device e valor entram por trilha de elegibilidade.</p>
+      </div>
+      <div class="flow-wrap">
+        <svg class="flow-svg" viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fluxo Pix 1-Tap: Consumer, Checkout, Nuvem Pago como iniciador, Banco/ITP, Order status, com Wallet como camada de UX">
+          <defs>
+            <marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="#5e616b"/>
+            </marker>
+          </defs>
+
+          <!-- Wallet / UX umbrella -->
+          <rect x="20" y="20" width="1040" height="56" rx="14" fill="#eef4ff" stroke="#2864e8" stroke-opacity="0.35" stroke-width="1.5"/>
+          <text x="540" y="44" text-anchor="middle" fill="#0050c3" font-family="Plus Jakarta Sans, sans-serif" font-weight="900" font-size="12" letter-spacing="0.08em">NUVEM · WALLET</text>
+          <text x="540" y="62" text-anchor="middle" fill="#0b0d12" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="13">identidade · consentimento · UX cross-store · fallback no checkout</text>
+
+          <!-- Connector from umbrella to row -->
+          <path d="M 540 76 L 540 110" stroke="#2864e8" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/>
+
+          <!-- Row of nodes -->
+          <g font-family="Plus Jakarta Sans, sans-serif">
+            <!-- Consumer -->
+            <rect x="20" y="120" width="220" height="86" rx="14" fill="#ffffff" stroke="#d9e3f3" stroke-width="1.5"/>
+            <text x="130" y="156" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="15">Consumer</text>
+            <text x="130" y="178" text-anchor="middle" fill="#5e616b" font-weight="600" font-size="12">logado em Wallet</text>
+
+            <path d="M 240 163 L 290 163" stroke="#5e616b" stroke-width="2" marker-end="url(#arr1)" fill="none"/>
+
+            <!-- Checkout -->
+            <rect x="295" y="120" width="220" height="86" rx="14" fill="#ffffff" stroke="#d9e3f3" stroke-width="1.5"/>
+            <text x="405" y="156" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="15">Checkout Nuvem</text>
+            <text x="405" y="178" text-anchor="middle" fill="#5e616b" font-weight="600" font-size="12">superfície de pagamento</text>
+
+            <path d="M 515 163 L 565 163" stroke="#5e616b" stroke-width="2" marker-end="url(#arr1)" fill="none"/>
+
+            <!-- Nuvem Pago - highlighted as ITP -->
+            <rect x="570" y="120" width="220" height="86" rx="14" fill="#e6f9f6" stroke="#15b8a6" stroke-width="2"/>
+            <text x="680" y="146" text-anchor="middle" fill="#08796d" font-weight="900" font-size="11" letter-spacing="0.08em">ITP · RECEBEDOR</text>
+            <text x="680" y="170" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="15">Nuvem Pago</text>
+            <text x="680" y="190" text-anchor="middle" fill="#08796d" font-weight="600" font-size="12">inicia o Pix via Open Finance</text>
+
+            <path d="M 790 163 L 840 163" stroke="#5e616b" stroke-width="2" marker-end="url(#arr1)" fill="none"/>
+
+            <!-- Banco / Partner ITP -->
+            <rect x="845" y="120" width="215" height="86" rx="14" fill="#ffffff" stroke="#d9e3f3" stroke-width="1.5"/>
+            <text x="952" y="156" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="15">Banco · Partner ITP</text>
+            <text x="952" y="178" text-anchor="middle" fill="#5e616b" font-weight="600" font-size="12">consentimento + biometria</text>
+
+            <!-- Return arc: bank -> nuvem pago -->
+            <path d="M 952 206 C 952 250, 680 250, 680 220" stroke="#5e616b" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr1)" fill="none"/>
+            <text x="816" y="270" text-anchor="middle" fill="#5e616b" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="12" font-style="italic">autorização do pagamento</text>
+
+            <!-- Order status -->
+            <rect x="295" y="280" width="220" height="80" rx="14" fill="#ffffff" stroke="#d9e3f3" stroke-width="1.5"/>
+            <text x="405" y="312" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="15">Order status</text>
+            <text x="405" y="332" text-anchor="middle" fill="#5e616b" font-weight="600" font-size="12">comprovante + settlement</text>
+
+            <!-- Nuvem Pago -> Order (down/left curve) -->
+            <path d="M 620 206 C 620 250, 460 250, 415 280" stroke="#5e616b" stroke-width="2" marker-end="url(#arr1)" fill="none"/>
+
+            <!-- Order -> Checkout (up) -->
+            <path d="M 295 305 C 240 305, 240 200, 295 195" stroke="#5e616b" stroke-width="2" marker-end="url(#arr1)" fill="none"/>
+            <text x="232" y="252" text-anchor="middle" fill="#5e616b" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="12" font-style="italic">confirmado</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <span class="eyebrow">Decisão de fluxo</span>
+        <h2>Elegibilidade, enrollment e fallback</h2>
+        <p>Pix 1-Tap só aparece quando todas as condições batem. Em qualquer falha, o Pix convencional segue como fallback permanente.</p>
+      </div>
+      <div class="flow-wrap">
+        <svg class="flow-svg" viewBox="0 0 1080 740" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Decisão de fluxo: elegibilidade, enrollment, biometria, reconciliação e fallback">
+          <defs>
+            <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="#5e616b"/>
+            </marker>
+          </defs>
+
+          <g font-family="Plus Jakarta Sans, sans-serif">
+            <!-- Start -->
+            <rect x="430" y="20" width="220" height="60" rx="30" fill="#eef4ff" stroke="#2864e8" stroke-width="1.5"/>
+            <text x="540" y="56" text-anchor="middle" fill="#0050c3" font-weight="900" font-size="14">Consumer logado em Wallet</text>
+
+            <path d="M 540 80 L 540 110" stroke="#5e616b" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
+
+            <!-- Diamond 1: elegível -->
+            <polygon points="540,118 740,182 540,246 340,182" fill="#ffffff" stroke="#5e616b" stroke-width="1.8"/>
+            <text x="540" y="174" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="13">Loja, banco, device</text>
+            <text x="540" y="194" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="13">e valor elegíveis?</text>
+
+            <!-- Sim down -->
+            <path d="M 540 246 L 540 280" stroke="#5e616b" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
+            <text x="556" y="266" fill="#08796d" font-weight="900" font-size="12">Sim</text>
+
+            <!-- Não right -->
+            <path d="M 740 182 L 860 182" stroke="#5e616b" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
+            <text x="800" y="174" text-anchor="middle" fill="#b32a55" font-weight="900" font-size="12">Não</text>
+
+            <!-- Fallback box (right column, full height marker) -->
+            <rect x="865" y="148" width="195" height="72" rx="14" fill="#fff1f4" stroke="#e44778" stroke-width="1.5"/>
+            <text x="962" y="180" text-anchor="middle" fill="#b32a55" font-weight="900" font-size="14">Pix convencional</text>
+            <text x="962" y="200" text-anchor="middle" fill="#b32a55" font-weight="700" font-size="12">fallback permanente</text>
+
+            <!-- Show Pix 1-Tap -->
+            <rect x="430" y="280" width="220" height="60" rx="14" fill="#ffffff" stroke="#d9e3f3" stroke-width="1.5"/>
+            <text x="540" y="316" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="14">Mostrar Pix 1-Tap</text>
+
+            <path d="M 540 340 L 540 370" stroke="#5e616b" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
+
+            <!-- Diamond 2: banco vinculado -->
+            <polygon points="540,378 740,438 540,498 340,438" fill="#ffffff" stroke="#5e616b" stroke-width="1.8"/>
+            <text x="540" y="432" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="13">Banco já</text>
+            <text x="540" y="452" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="13">vinculado?</text>
+
+            <!-- Não left -> Vincular banco -->
+            <path d="M 340 438 L 240 438" stroke="#5e616b" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
+            <text x="288" y="428" text-anchor="middle" fill="#b32a55" font-weight="900" font-size="12">Não</text>
+
+            <rect x="40" y="408" width="200" height="60" rx="14" fill="#ffffff" stroke="#2864e8" stroke-width="1.5"/>
+            <text x="140" y="436" text-anchor="middle" fill="#0050c3" font-weight="900" font-size="13">Vincular banco</text>
+            <text x="140" y="454" text-anchor="middle" fill="#5e616b" font-weight="600" font-size="11">enrollment, uma vez</text>
+
+            <!-- Vincular banco -> Confirmar biometria (down and right) -->
+            <path d="M 140 468 L 140 540 L 430 540" stroke="#5e616b" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
+
+            <!-- Sim down -->
+            <path d="M 540 498 L 540 530" stroke="#5e616b" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
+            <text x="556" y="518" fill="#08796d" font-weight="900" font-size="12">Sim</text>
+
+            <!-- Confirmar biometria -->
+            <rect x="430" y="530" width="220" height="64" rx="14" fill="#e6f9f6" stroke="#15b8a6" stroke-width="1.8"/>
+            <text x="540" y="558" text-anchor="middle" fill="#08796d" font-weight="900" font-size="14">Confirmar com biometria</text>
+            <text x="540" y="578" text-anchor="middle" fill="#08796d" font-weight="600" font-size="12">FIDO2 do device</text>
+
+            <path d="M 540 594 L 540 620" stroke="#5e616b" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
+
+            <!-- Diamond 3: pago e reconciliado -->
+            <polygon points="540,628 740,680 540,732 340,680" fill="#ffffff" stroke="#5e616b" stroke-width="1.8"/>
+            <text x="540" y="676" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="13">Pago e</text>
+            <text x="540" y="696" text-anchor="middle" fill="#0b0d12" font-weight="900" font-size="13">reconciliado?</text>
+
+            <!-- Não right -> fallback -->
+            <path d="M 740 680 L 860 680" stroke="#5e616b" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
+            <text x="800" y="672" text-anchor="middle" fill="#b32a55" font-weight="900" font-size="12">Não</text>
+
+            <rect x="865" y="648" width="195" height="64" rx="14" fill="#fff1f4" stroke="#e44778" stroke-width="1.5"/>
+            <text x="962" y="676" text-anchor="middle" fill="#b32a55" font-weight="900" font-size="14">Pix convencional</text>
+            <text x="962" y="696" text-anchor="middle" fill="#b32a55" font-weight="700" font-size="12">fallback permanente</text>
+
+            <!-- Sim left -> success -->
+            <path d="M 340 680 L 240 680" stroke="#5e616b" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
+            <text x="288" y="670" text-anchor="middle" fill="#08796d" font-weight="900" font-size="12">Sim</text>
+
+            <rect x="40" y="648" width="200" height="64" rx="32" fill="#e6f9f6" stroke="#15b8a6" stroke-width="2"/>
+            <text x="140" y="685" text-anchor="middle" fill="#08796d" font-weight="900" font-size="14">Pago confirmado</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <span class="eyebrow">Por que agora</span>
+        <h2>O volume já está no nosso fast path</h2>
+        <p>Baseline interno Wallet, fev–abr/2026. Pix é a parte mais pesada do volume logado em BR, e a maior fatia já passa por Nuvem Pago.</p>
+      </div>
+      <div class="grid-stats">
+        <div class="stat">
+          <div class="num">46,1%</div>
+          <div class="label">do volume logado em Wallet é Pix</div>
+          <div class="sub">Pedidos pagos logados, Brasil</div>
+        </div>
+        <div class="stat">
+          <div class="num">71,0%</div>
+          <div class="label">do Pix logado passa por Nuvem Pago</div>
+          <div class="sub">Compartilhamento dentro do Pix logado em Wallet</div>
+        </div>
+        <div class="stat">
+          <div class="num">10,6%</div>
+          <div class="label">dos buyers compraram em 2+ lojas</div>
+          <div class="sub">Sinal de repetição cross-store que o 1-Tap potencializa</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>Pix 1-Tap · Wallet, Q3 2026</div>
+      <div>Para revisão com Nuvem Pago e liderança</div>
+    </footer>
+
+  </div>
+
+
+</div>
+</body>
+</html>
