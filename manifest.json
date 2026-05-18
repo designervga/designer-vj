@@ -35,17 +35,17 @@
     "updated_at": "2026-04-30T10:58:00Z"
   },
   {
-    "slug": "pix-1tap",
-    "title": "Pix 1-Tap · Wallet",
-    "url": "https://designervga.github.io/designer-vj/artifacts/pix-1tap/",
-    "date": "18/05/2026",
-    "updated_at": "2026-05-18T17:32:39Z"
-  },
-  {
     "slug": "personal-shopper-architecture",
     "title": "Personal Shopper Architecture",
     "url": "https://designervga.github.io/designer-vj/artifacts/personal-shopper-architecture/",
     "date": "18/05/2026",
     "updated_at": "2026-05-18T17:55:54Z"
+  },
+  {
+    "slug": "pix-1tap",
+    "title": "Pix 1-Tap · Wallet",
+    "url": "https://designervga.github.io/designer-vj/artifacts/pix-1tap/",
+    "date": "18/05/2026",
+    "updated_at": "2026-05-18T18:05:47Z"
   }
 ]
