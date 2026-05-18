@@ -72,6 +72,7 @@
       position: relative;
       margin: 0 auto;
       width: min(100%, 380px);
+      max-width: 100%;
       aspect-ratio: 9 / 16;
       border-radius: 36px;
       overflow: hidden;
@@ -217,7 +218,24 @@
         margin-bottom: 18px;
       }
       .hero { padding: 22px; }
-      .video-frame { border-radius: 28px; }
+      .hero h1 { font-size: 34px; }
+      .hero .lede { font-size: 16px; }
+      .section-head h2 { font-size: 27px; }
+      .video-frame {
+        width: min(100%, 300px);
+        border-radius: 28px;
+        box-shadow: 0 22px 46px rgb(0 0 0 / 16%), 0 0 0 6px #ffffff, 0 0 0 7px var(--line-2);
+      }
+      .flow-wrap {
+        overflow-x: auto;
+        padding: 18px 12px;
+      }
+      .flow-svg { min-width: 720px; }
+      footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
     }
   </style>
 
@@ -513,8 +531,8 @@
     <section>
       <div class="section-head">
         <span class="eyebrow">Tamanho da oportunidade</span>
-        <h2>Quase metade dos pedidos logados é Pix, e 71% desse Pix passa por Nuvem Pago</h2>
-        <p>Baseline interno Wallet, BR, fev-abr/2026. Pix concentrou 46,1% dos pedidos pagos logados, e 71,0% desse Pix passou por Nuvem Pago.</p>
+        <h2>Pix já é quase metade dos pedidos logados, mas ainda exige sair para pagar</h2>
+        <p>Baseline interno Wallet, BR, fev-abr/2026. Entre pedidos Pix pagos logados, o checkout até o pedido teve mediana de 90s; depois disso, a confirmação do Pix levou mais 58s de mediana.</p>
       </div>
       <div class="grid-stats">
         <div class="stat">
@@ -523,9 +541,9 @@
           <div class="sub">Wallet, Brasil, fev-abr/2026</div>
         </div>
         <div class="stat">
-          <div class="num">71,0%</div>
-          <div class="label">do Pix logado passou por Nuvem Pago</div>
-          <div class="sub">Participação de Nuvem Pago dentro do Pix logado em Wallet</div>
+          <div class="num">58s</div>
+          <div class="label">até o Pix ser confirmado após concluir o pedido</div>
+          <div class="sub">Mediana entre pedido concluído e pagamento confirmado. Checkout até pedido: 90s.</div>
         </div>
         <div class="stat">
           <div class="num">10,6%</div>
