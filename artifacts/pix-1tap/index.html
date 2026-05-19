@@ -71,15 +71,15 @@
     .video-frame {
       position: relative;
       margin: 0 auto;
-      width: min(100%, 380px);
+      width: min(100%, 340px);
       max-width: 100%;
-      aspect-ratio: 9 / 16;
+      aspect-ratio: 215 / 466;
       border-radius: 36px;
       overflow: hidden;
       background: #000;
       box-shadow: 0 30px 70px rgb(0 0 0 / 18%), 0 0 0 8px #ffffff, 0 0 0 9px var(--line-2);
     }
-    .video-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .video-frame video { width: 100%; height: 100%; object-fit: contain; display: block; background: #000; }
 
     /* Section */
     section { margin-top: 56px; }
@@ -222,7 +222,7 @@
       .hero .lede { font-size: 16px; }
       .section-head h2 { font-size: 27px; }
       .video-frame {
-        width: min(100%, 300px);
+        width: min(100%, 280px);
         border-radius: 28px;
         box-shadow: 0 22px 46px rgb(0 0 0 / 16%), 0 0 0 6px #ffffff, 0 0 0 7px var(--line-2);
       }
