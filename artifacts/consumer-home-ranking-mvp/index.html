@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home Ranking MVP - Store-first personalization</title>
+  <meta name="description" content="A Product Manager one-pager explaining the Consumer App Home ranking MVP.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231960ae'/%3E%3Cpath d='M16 36h10v12H16V36Zm14-20h10v32H30V16Zm14 12h10v20H44V28Z' fill='white'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #f3f6fa;
+      --paper: #ffffff;
+      --ink: #0f172a;
+      --muted: #64748b;
+      --soft: #e2e8f0;
+      --blue: #1960ae;
+      --blue-soft: #e8f1fb;
+      --green: #0d9488;
+      --green-soft: #dff7f3;
+      --amber: #d97706;
+      --amber-soft: #fff4d8;
+      --violet: #6366f1;
+      --violet-soft: #eeedff;
+      --shadow: 0 18px 48px rgba(15, 23, 42, 0.10);
+      --soft-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: rgba(243, 246, 250, 0.88);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.88);
+    }
+
+    .topbar-inner {
+      width: min(1180px, calc(100% - 36px));
+      height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: var(--blue);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav a {
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    .nav a:hover {
+      background: #ffffff;
+      color: var(--blue);
+    }
+
+    .hero {
+      padding: 56px 0 30px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.98fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      background: var(--paper);
+      border-radius: 22px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .eyebrow {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: 0.94;
+      letter-spacing: -0.05em;
+      max-width: 720px;
+    }
+
+    .lead {
+      margin: 22px 0 0;
+      max-width: 650px;
+      color: #334155;
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      background: #f8fafc;
+      border: 1px solid var(--soft);
+      padding: 9px 12px;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .pill strong {
+      color: var(--ink);
+    }
+
+    .hero-note {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .hero-note-card {
+      background: #f8fafc;
+      border-radius: 14px;
+      padding: 14px;
+      border: 1px solid var(--soft);
+    }
+
+    .hero-note-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .hero-note-card strong {
+      font-size: 15px;
+      line-height: 1.25;
+      display: block;
+    }
+
+    .hero-visual {
+      display: grid;
+      grid-template-columns: 0.86fr 1.14fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .phone {
+      background: #0b1220;
+      border-radius: 34px;
+      padding: 12px;
+      box-shadow: var(--shadow);
+      align-self: center;
+    }
+
+    .phone-screen {
+      background: #f8fafc;
+      border-radius: 26px;
+      overflow: hidden;
+      min-height: 560px;
+      padding: 18px 14px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .phone-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .hello {
+      font-size: 14px;
+      font-weight: 850;
+      letter-spacing: -0.01em;
+    }
+
+    .address {
+      margin-top: 4px;
+      font-size: 9px;
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    .cart-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: #ffffff;
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      font-weight: 900;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .avatar-row {
+      display: flex;
+      gap: 7px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--green-soft), #ffffff);
+      border: 2px solid #ffffff;
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 900;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .phone-section {
+      margin: 12px 0 15px;
+    }
+
+    .phone-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #172033;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .phone-title span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .order-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .progress {
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--blue) 72%, #cbd5e1 72%);
+      margin-bottom: 10px;
+    }
+
+    .product-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .mini-product {
+      min-height: 90px;
+      border-radius: 14px;
+      padding: 8px;
+      background: #ffffff;
+      box-shadow: var(--soft-shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .mini-product::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 46px;
+      border-radius: 10px;
+      background: linear-gradient(145deg, #e0f2fe, #fdf2f8);
+    }
+
+    .mini-product.green::before {
+      background: linear-gradient(145deg, #c4f5d3, #f2ffe6);
+    }
+
+    .mini-product.amber::before {
+      background: linear-gradient(145deg, #fde68a, #fff7ed);
+    }
+
+    .mini-label {
+      margin-top: 6px;
+      font-size: 8px;
+      color: #334155;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .store-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 11px;
+      box-shadow: var(--soft-shadow);
+      margin-bottom: 10px;
+    }
+
+    .store-name {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .ranking-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .figure-card {
+      background: var(--paper);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(226, 232, 240, 0.68);
+    }
+
+    .figure-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .figure-title strong {
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 900;
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .pipeline {
+      display: grid;
+      gap: 10px;
+    }
+
+    .pipeline-step {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 13px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--soft);
+      position: relative;
+    }
+
+    .pipeline-step + .pipeline-step::before {
+      content: "";
+      position: absolute;
+      left: 34px;
+      top: -12px;
+      width: 2px;
+      height: 12px;
+      background: #cbd5e1;
+    }
+
+    .step-num {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: #ffffff;
+      color: var(--blue);
+      font-weight: 950;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .step-copy h3 {
+      margin: 0 0 4px;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+    }
+
+    .step-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .score-card {
+      background: var(--paper);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: var(--soft-shadow);
+      border: 1px solid var(--soft);
+    }
+
+    .score-card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .formula {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 0;
+    }
+
+    .chip {
+      border-radius: 999px;
+      padding: 7px 9px;
+      background: #f8fafc;
+      border: 1px solid var(--soft);
+      color: #334155;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .chip.blue {
+      background: var(--blue-soft);
+      color: var(--blue);
+      border-color: #c7ddf5;
+    }
+
+    .chip.green {
+      background: var(--green-soft);
+      color: var(--green);
+      border-color: #bcebe4;
+    }
+
+    .chip.amber {
+      background: var(--amber-soft);
+      color: var(--amber);
+      border-color: #f6d99d;
+    }
+
+    .chip.violet {
+      background: var(--violet-soft);
+      color: var(--violet);
+      border-color: #d6d4ff;
+    }
+
+    section {
+      margin: 26px 0;
+    }
+
+    .section-head {
+      margin: 0 0 16px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      max-width: 740px;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 430px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .article-card {
+      background: var(--paper);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--soft-shadow);
+      border: 1px solid var(--soft);
+    }
+
+    .article-card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .article-card p,
+    .article-card li {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .article-card p {
+      margin: 0;
+    }
+
+    .article-card ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+
+    .callout {
+      background: #0f172a;
+      color: #ffffff;
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .callout .eyebrow {
+      color: #93c5fd;
+    }
+
+    .callout h2 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 44px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .callout p {
+      color: #cbd5e1;
+      max-width: 860px;
+      margin: 14px 0 0;
+      font-size: 17px;
+    }
+
+    .home-map {
+      display: grid;
+      gap: 10px;
+    }
+
+    .home-row {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .home-cell {
+      background: #f8fafc;
+      border: 1px solid var(--soft);
+      border-radius: 16px;
+      padding: 14px;
+      min-height: 108px;
+    }
+
+    .home-cell strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .home-cell span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .home-cell.mvp {
+      background: var(--green-soft);
+      border-color: #bcebe4;
+    }
+
+    .home-cell.simple {
+      background: #f8fafc;
+    }
+
+    .home-cell.later {
+      background: var(--violet-soft);
+      border-color: #d6d4ff;
+    }
+
+    .readme {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .readme-panel {
+      background: var(--paper);
+      border-radius: 22px;
+      padding: 24px;
+      border: 1px solid var(--soft);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .readme-panel h3 {
+      margin: 0 0 12px;
+      font-size: 21px;
+      letter-spacing: -0.03em;
+    }
+
+    .readme-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .readme-item {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 12px;
+      padding: 12px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--soft);
+    }
+
+    .readme-item strong {
+      color: var(--blue);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .readme-item span {
+      color: #334155;
+      font-size: 14px;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .dash-card {
+      background: var(--paper);
+      border: 1px solid var(--soft);
+      border-top: 4px solid var(--blue);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .dash-card:nth-child(2) {
+      border-top-color: var(--green);
+    }
+
+    .dash-card:nth-child(3) {
+      border-top-color: var(--amber);
+    }
+
+    .dash-card:nth-child(4) {
+      border-top-color: var(--violet);
+    }
+
+    .dash-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: -0.025em;
+    }
+
+    .dash-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .timeline-row {
+      display: grid;
+      grid-template-columns: 100px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .timeline-key {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #ffffff;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    footer {
+      margin: 38px 0 28px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .nav {
+        display: none;
+      }
+
+      .hero,
+      .hero-visual,
+      .two-col,
+      .three-col,
+      .readme,
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        min-height: auto;
+      }
+
+      .hero-note {
+        grid-template-columns: 1fr;
+      }
+
+      .home-row {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 10px;
+      }
+
+      .phone {
+        width: min(360px, 100%);
+        margin: 0 auto;
+      }
+
+      .readme-item,
+      .timeline-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+<style>
+  .vj-protected-content {
+    display: none;
+  }
+
+  body.vj-unlocked .vj-protected-content {
+    display: block;
+  }
+
+  body.vj-unlocked .vj-lock {
+    display: none;
+  }
+
+  .vj-lock {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: #eef3f8;
+    color: #111827;
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .vj-lock-card {
+    width: min(100%, 380px);
+    background: #ffffff;
+    border: 1px solid #d8dee8;
+    border-radius: 10px;
+    padding: 22px;
+    box-shadow: 0 16px 40px rgba(17, 24, 39, 0.1);
+  }
+
+  .vj-lock-card h1 {
+    margin: 0 0 8px;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+
+  .vj-lock-card p {
+    margin: 0 0 16px;
+    color: #667085;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .vj-lock-form {
+    display: grid;
+    gap: 10px;
+  }
+
+  .vj-lock-form input {
+    height: 44px;
+    border: 1px solid #d8dee8;
+    border-radius: 8px;
+    padding: 0 12px;
+    font: inherit;
+  }
+
+  .vj-lock-form button {
+    height: 44px;
+    border: 0;
+    border-radius: 8px;
+    background: #0066e5;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .vj-lock-error {
+    min-height: 18px;
+    color: #b42318;
+    font-size: 12px;
+    font-weight: 700;
+  }
+</style>
+
+</head>
+<body>
+
+<section class="vj-lock" aria-label="Protected page">
+  <form class="vj-lock-card vj-lock-form" data-vj-lock>
+    <h1>Consumer Home Ranking MVP</h1>
+    <p>Ingresá la contraseña para ver este material.</p>
+    <input type="password" autocomplete="current-password" placeholder="Contraseña" aria-label="Contraseña" data-vj-password>
+    <button type="submit">Entrar</button>
+    <div class="vj-lock-error" data-vj-error></div>
+  </form>
+</section>
+<script>
+(() => {
+  const expected = "3bb534922618f14b978bd59c9d98802604a69587847f610f3b0efe1a560f43d0";
+  const key = "designer-vj-auth";
+  const enc = new TextEncoder();
+  const toHex = buffer => Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+  const unlock = () => document.body.classList.add("vj-unlocked");
+  if (sessionStorage.getItem(key) === expected) unlock();
+  document.querySelector("[data-vj-lock]")?.addEventListener("submit", async event => {
+    event.preventDefault();
+    const input = document.querySelector("[data-vj-password]");
+    const error = document.querySelector("[data-vj-error]");
+    const digest = await crypto.subtle.digest("SHA-256", enc.encode(input.value));
+    const actual = toHex(digest);
+    if (actual === expected) {
+      sessionStorage.setItem(key, expected);
+      unlock();
+      input.value = "";
+    } else {
+      error.textContent = "Contraseña incorrecta.";
+      input.select();
+    }
+  });
+})();
+</script>
+
+<div class="vj-protected-content">
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="#top" class="brand" aria-label="Home Ranking MVP">
+        <span class="brand-mark">HR</span>
+        <span>Home Ranking MVP</span>
+      </a>
+      <nav class="nav" aria-label="Page sections">
+        <a href="#quick-win">Quick win</a>
+        <a href="#pipeline">Pipeline</a>
+        <a href="#home">Home mapping</a>
+        <a href="#pi">Product Intelligence</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="page">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div>
+          <div class="eyebrow">Consumer App Recommendation Lab</div>
+          <h1 id="hero-title">Store-first personalization for the new Home.</h1>
+          <p class="lead">
+            The MVP is not a full recommendation platform. It is a simple, explainable ranking layer that decides which stores appear first, then chooses the best products inside each store card.
+          </p>
+          <div class="hero-actions" aria-label="MVP guardrails">
+            <span class="pill"><strong>Start here</strong> Store ranking</span>
+            <span class="pill"><strong>Then</strong> Product ranking inside stores</span>
+            <span class="pill"><strong>Not yet</strong> Collaborative filtering</span>
+          </div>
+        </div>
+        <div class="hero-note">
+          <div class="hero-note-card">
+            <span>Product thesis</span>
+            <strong>Make the Home feel personal without overbuilding ML.</strong>
+          </div>
+          <div class="hero-note-card">
+            <span>Quick win</span>
+            <strong>Rank "Suas marcas" and the store avatar strip first.</strong>
+          </div>
+          <div class="hero-note-card">
+            <span>Learning path</span>
+            <strong>Log rank position and reason codes from day one.</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Prototype-inspired Home and ranking pipeline">
+        <div class="phone" aria-label="Current Home prototype abstraction">
+          <div class="phone-screen">
+            <div class="phone-head">
+              <div>
+                <div class="hello">Ola, Ana Laura</div>
+                <div class="address">Saved delivery address</div>
+              </div>
+              <div class="cart-dot">3</div>
+            </div>
+            <div class="avatar-row" aria-label="Ranked store strip">
+              <div class="avatar">LO</div>
+              <div class="avatar">SD</div>
+              <div class="avatar">CA</div>
+              <div class="avatar">MB</div>
+              <div class="avatar">TB</div>
+            </div>
+            <div class="phone-section">
+              <div class="phone-title">Minhas compras <span>recency</span></div>
+              <div class="order-card">
+                <div class="progress"></div>
+                <div class="mini-label">A caminho - Las Oreiro</div>
+              </div>
+            </div>
+            <div class="phone-section">
+              <div class="phone-title">Seus carrinhos te esperam <span>recency</span></div>
+              <div class="product-row">
+                <div class="mini-product"><div class="mini-label">cart 1</div></div>
+                <div class="mini-product green"><div class="mini-label">cart 2</div></div>
+                <div class="mini-product amber"><div class="mini-label">cart 3</div></div>
+              </div>
+            </div>
+            <div class="phone-section">
+              <div class="phone-title">Suas marcas <span>ranked</span></div>
+              <div class="store-card">
+                <div class="store-name">Campillo <span class="tag">#1</span></div>
+                <div class="store-grid">
+                  <div class="mini-product green"><div class="mini-label">discount</div></div>
+                  <div class="mini-product"><div class="mini-label">top seller</div></div>
+                </div>
+              </div>
+              <div class="store-card">
+                <div class="store-name">Las Oreiro <span class="tag">#2</span></div>
+                <div class="store-grid">
+                  <div class="mini-product amber"><div class="mini-label">fresh</div></div>
+                  <div class="mini-product"><div class="mini-label">affinity</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ranking-stack">
+          <div class="figure-card">
+            <div class="figure-title">
+              <strong>How the system reads the Home</strong>
+              <span class="tag">MVP</span>
+            </div>
+            <div class="pipeline">
+              <div class="pipeline-step">
+                <div class="step-num">1</div>
+                <div class="step-copy">
+                  <h3>Inventory</h3>
+                  <p>Stores, products, carts, offers and purchase context that can legally and safely enter the Home.</p>
+                </div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">2</div>
+                <div class="step-copy">
+                  <h3>Candidates</h3>
+                  <p>Known stores, similar stores, products in stock, discounts and high-quality fallback supply.</p>
+                </div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">3</div>
+                <div class="step-copy">
+                  <h3>Common ranking</h3>
+                  <p>One explainable V0 score balances affinity, quality, recency, delivery fit and deal strength.</p>
+                </div>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">4</div>
+                <div class="step-copy">
+                  <h3>Slate rules</h3>
+                  <p>Dedupe stores, cap repeated merchants, keep quality floors and reserve small exploration slots.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="callout">
+            <div class="eyebrow">The PM question</div>
+            <h2>Do we have enough good candidates for this person, in this shelf?</h2>
+            <p>If yes, rank them. If not, expand with similar stores, quality-floor products or controlled exploration.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quick-win">
+      <div class="section-head">
+        <h2>The highest-value quick win is store-first ranking.</h2>
+        <p>The current Home already has a strong relationship surface: store avatars and "Suas marcas". That is where personalization becomes visible with the least product risk.</p>
+      </div>
+      <div class="three-col">
+        <article class="article-card">
+          <h3>Why this surface first</h3>
+          <p>Users understand stores as a personal object. They bought, followed, visited or left carts there. Reordering stores is easy to explain and easy to validate.</p>
+        </article>
+        <article class="article-card">
+          <h3>What changes for the consumer</h3>
+          <p>The Home stops feeling like a generic catalog. The first stores are familiar, recent, trustworthy and likely to have useful products.</p>
+        </article>
+        <article class="article-card">
+          <h3>What stays simple</h3>
+          <p>Carts, current orders, recently viewed products and buy-again can stay recency-led in the MVP. They are already intent-heavy.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="pipeline">
+      <div class="section-head">
+        <h2>The MVP has two rankings, not one giant feed.</h2>
+        <p>First rank stores for the user. Then rank products inside each selected store card.</p>
+      </div>
+      <div class="two-col">
+        <article class="score-card">
+          <div class="eyebrow">Store score V0</div>
+          <h3>Which stores should appear first?</h3>
+          <p>Use relationship and trust signals that already exist or can be proxied safely.</p>
+          <div class="formula" aria-label="Store score components">
+            <span class="chip blue">user-store affinity</span>
+            <span class="chip green">store quality</span>
+            <span class="chip">recency</span>
+            <span class="chip amber">delivery fit</span>
+            <span class="chip violet">deal strength</span>
+            <span class="chip">product coverage</span>
+          </div>
+        </article>
+        <article class="score-card">
+          <div class="eyebrow">Product score V0</div>
+          <h3>Which products should the store card show?</h3>
+          <p>Keep the product ranking scoped to the selected store, so the Home remains direct-to-store and explainable.</p>
+          <div class="formula" aria-label="Product score components">
+            <span class="chip blue">category affinity</span>
+            <span class="chip violet">discount</span>
+            <span class="chip green">availability</span>
+            <span class="chip">freshness</span>
+            <span class="chip amber">top sellers</span>
+            <span class="chip">content quality</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="home">
+      <div class="section-head">
+        <h2>How this maps to the current Home prototype.</h2>
+        <p>Not every shelf needs ranking on day one. The MVP should touch the parts where ranking creates visible relevance without fighting strong intent signals.</p>
+      </div>
+      <div class="figure-card">
+        <div class="home-map" aria-label="Home shelf MVP decision map">
+          <div class="home-row">
+            <div class="home-cell simple">
+              <strong>Minhas compras</strong>
+              <span>Keep utility-led ordering: status and recency.</span>
+            </div>
+            <div class="home-cell simple">
+              <strong>Seus carrinhos te esperam</strong>
+              <span>Keep recency first. This shelf is already high-intent.</span>
+            </div>
+            <div class="home-cell simple">
+              <strong>Vistos recentemente</strong>
+              <span>Keep recency. Do not over-rank remembered browsing.</span>
+            </div>
+          </div>
+          <div class="home-row">
+            <div class="home-cell mvp">
+              <strong>Store avatar strip</strong>
+              <span>Rank stores by affinity, recency, quality and delivery fit.</span>
+            </div>
+            <div class="home-cell mvp">
+              <strong>Suas marcas</strong>
+              <span>Main MVP surface: rank stores, then products inside each card.</span>
+            </div>
+            <div class="home-cell mvp">
+              <strong>Based on purchases</strong>
+              <span>Use content-based candidates from known and similar stores.</span>
+            </div>
+          </div>
+          <div class="home-row">
+            <div class="home-cell later">
+              <strong>Descontos em destaque</strong>
+              <span>V0 can boost affinity, but needs governed offer rules later.</span>
+            </div>
+            <div class="home-cell later">
+              <strong>Lancamentos</strong>
+              <span>Freshness plus affinity is useful after store ranking is stable.</span>
+            </div>
+            <div class="home-cell later">
+              <strong>Mais populares</strong>
+              <span>Use popularity only with quality and affinity guardrails.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="readme">
+        <div class="readme-panel">
+          <div class="eyebrow">README for PMs</div>
+          <h3>What we are building</h3>
+          <p>
+            A store-first personalization layer for the Consumer App Home. It should improve discovery without becoming a marketplace feed, paid auction or opaque ML system.
+          </p>
+          <div class="formula">
+            <span class="chip green">explainable</span>
+            <span class="chip blue">direct-to-store</span>
+            <span class="chip amber">content-based first</span>
+            <span class="chip violet">ML later</span>
+          </div>
+        </div>
+        <div class="readme-panel">
+          <h3>Operating principles</h3>
+          <div class="readme-list">
+            <div class="readme-item">
+              <strong>Start narrow</strong>
+              <span>Personalize stores and products inside store cards before attempting full Home optimization.</span>
+            </div>
+            <div class="readme-item">
+              <strong>Keep intent</strong>
+              <span>Orders, carts and recently viewed products can stay recency-led until ranking logs prove otherwise.</span>
+            </div>
+            <div class="readme-item">
+              <strong>Use content</strong>
+              <span>Verticals, categories, tags, price bands and store metadata are enough for a useful V0.</span>
+            </div>
+            <div class="readme-item">
+              <strong>Log the slate</strong>
+              <span>Every ranked item needs section, rank position, reason code and score version.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pi">
+      <div class="section-head">
+        <h2>How Product Intelligence helps us learn before shipping ML.</h2>
+        <p>The dashboard is not the production ranker. It is the PM and engineering lab for seeing whether the system is ready.</p>
+      </div>
+      <div class="dashboard-grid">
+        <article class="dash-card">
+          <h3>Home System Map</h3>
+          <p>Explains the pipeline: generators, eligibility, common score and slate rules.</p>
+        </article>
+        <article class="dash-card">
+          <h3>Sparse User Simulator</h3>
+          <p>Shows one persona, their signals, generated candidates, store rank and final Home preview.</p>
+        </article>
+        <article class="dash-card">
+          <h3>Candidate Pools</h3>
+          <p>Answers whether each shelf has enough usable inventory before ranking.</p>
+        </article>
+        <article class="dash-card">
+          <h3>Readiness & Gaps</h3>
+          <p>Separates available data, proxies and missing production contracts.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>The implementation path.</h2>
+        <p>V0 should create consumer value now and make the next ML step safer.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-row">
+          <div class="timeline-key">MVP</div>
+          <article class="article-card">
+            <h3>Store-first ranking</h3>
+            <p>Rank the store avatar strip and "Suas marcas". Rank products inside each selected store card. Use content-based affinity, store quality, recency, delivery fit and product quality.</p>
+          </article>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-key">Next</div>
+          <article class="article-card">
+            <h3>Broaden product shelves</h3>
+            <p>Apply the same scoring and slate rules to "Based on purchases", discounts, launches and popular products, with careful diversity controls.</p>
+          </article>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-key">Later</div>
+          <article class="article-card">
+            <h3>Retrieval and collaborative learning</h3>
+            <p>Use embeddings as candidate generators and collaborative filtering only after impressions, rank positions, reason codes and score versions are reliable.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="callout">
+      <div class="eyebrow">Recommended decision</div>
+      <h2>Ship an explainable V0 that makes stores feel personal first.</h2>
+      <p>
+        The biggest near-term lift is not smarter abandoned carts or recently viewed products. It is making the stores and products already present in the Home appear in a more useful order for each consumer.
+      </p>
+    </section>
+
+    <footer>
+      Consumer App Home Ranking MVP - one-pager for Product, Design and Engineering alignment.
+    </footer>
+  </main>
+
+</div>
+</body>
+</html>
