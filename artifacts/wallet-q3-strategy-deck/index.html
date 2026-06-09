@@ -1,0 +1,2118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Wallet Q3 2026 Product Strategy Deck</title>
+  <style>
+    @font-face {
+      font-family: "Satoshi";
+      src: url("./assets/satoshi-variable.woff2?v=20260608") format("woff2");
+      font-weight: 300 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --stage-w: 1920px;
+      --stage-h: 1080px;
+      --scale: 1;
+      --navy: #29345f;
+      --navy-2: #182342;
+      --ink: #253050;
+      --muted: #66718b;
+      --line: #d9e1ec;
+      --paper: #fcfdff;
+      --panel: #f3f7fb;
+      --blue: #1f77ff;
+      --blue-soft: #dcebff;
+      --teal: #18b58f;
+      --teal-soft: #dff7ef;
+      --green: #5fb66d;
+      --green-soft: #e5f4e7;
+      --orange: #f59e0b;
+      --orange-soft: #fff1d7;
+      --pink: #cc4b7f;
+      --pink-soft: #fae8f1;
+      --gold: #f1d27a;
+      --white: #ffffff;
+      --shadow: 0 18px 44px rgba(37, 48, 80, 0.09);
+      --shadow-strong: 0 28px 70px rgba(37, 48, 80, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #e8edf5;
+      color: var(--ink);
+      font-family: "Satoshi", "Aptos", "Helvetica Neue", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .viewport {
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(140deg, rgba(45, 54, 95, 0.10), rgba(45, 54, 95, 0) 40%),
+        #e8edf5;
+    }
+
+    .deck {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: var(--stage-w);
+      height: var(--stage-h);
+      transform: translate(-50%, -50%) scale(var(--scale));
+      transform-origin: center center;
+      background: var(--paper);
+      box-shadow: 0 34px 100px rgba(16, 24, 48, 0.22);
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: var(--stage-w);
+      height: var(--stage-h);
+      background: var(--paper);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 180ms ease;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 112px 0 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(226, 232, 242, 0.48), rgba(226, 232, 242, 0) 110px),
+        radial-gradient(circle at 86% 18%, rgba(31, 119, 255, 0.045), rgba(31, 119, 255, 0) 360px);
+      opacity: 0.9;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .top-strip {
+      height: 7px;
+      background: var(--gold);
+    }
+
+    .title-bar {
+      height: 105px;
+      display: grid;
+      place-items: center;
+      padding: 0 120px;
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      font-size: 34px;
+      font-weight: 850;
+      line-height: 1.1;
+      box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.10);
+    }
+
+    .slide-body {
+      height: 968px;
+      padding: 66px 102px 58px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    ul,
+    ol {
+      margin: 0;
+    }
+
+    h1 {
+      color: var(--ink);
+      font-size: 50px;
+      line-height: 1.15;
+      font-weight: 540;
+      max-width: 1660px;
+    }
+
+    h1 strong,
+    .bold {
+      font-weight: 870;
+    }
+
+    h2 {
+      color: var(--navy);
+      font-size: 31px;
+      line-height: 1.18;
+      font-weight: 850;
+    }
+
+    h3 {
+      color: var(--navy);
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 850;
+    }
+
+    .body-note {
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.42;
+    }
+
+    .rule {
+      width: 74px;
+      height: 4px;
+      margin: 32px 0 28px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--blue), #54b2ff 72%, var(--gold));
+    }
+
+    .caption {
+      position: absolute;
+      left: 102px;
+      bottom: 22px;
+      color: #858fa5;
+      font-size: 13px;
+      line-height: 1.25;
+      max-width: 1210px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .card,
+    .soft-panel,
+    .visual-frame {
+      border-radius: 8px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 26px 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .soft-panel {
+      background: var(--panel);
+      border: 1px solid rgba(214, 223, 236, 0.92);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.80);
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      margin-top: 36px;
+    }
+
+    .metric-card {
+      position: relative;
+      min-height: 154px;
+      padding: 25px 26px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #d5e5fa;
+      box-shadow: 0 14px 34px rgba(37, 48, 80, 0.06);
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--blue), #76c6ff);
+    }
+
+    .metric-card.green::before {
+      background: linear-gradient(90deg, var(--green), var(--teal));
+    }
+
+    .metric-card.orange::before {
+      background: linear-gradient(90deg, var(--orange), #ffbd59);
+    }
+
+    .metric-card.pink::before {
+      background: linear-gradient(90deg, var(--pink), #e78ab0);
+    }
+
+    .metric-card .value {
+      display: block;
+      color: var(--blue);
+      font-size: 48px;
+      line-height: 1;
+      font-weight: 930;
+    }
+
+    .metric-card.green .value {
+      color: #29934d;
+    }
+
+    .metric-card.orange .value {
+      color: #b9770e;
+    }
+
+    .metric-card.pink .value {
+      color: #b13e6e;
+    }
+
+    .metric-card .label {
+      display: block;
+      margin-top: 14px;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.22;
+      font-weight: 760;
+    }
+
+    .metric-card .sub {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.25;
+      font-weight: 620;
+    }
+
+    .thesis-layout {
+      display: grid;
+      grid-template-columns: 0.84fr 1.16fr;
+      gap: 42px;
+      align-items: stretch;
+      margin-top: 26px;
+    }
+
+    .thesis-card {
+      min-height: 520px;
+      padding: 34px;
+      display: grid;
+      align-content: start;
+      gap: 26px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .thesis-card h2 {
+      font-size: 38px;
+      line-height: 1.12;
+    }
+
+    .thesis-card p {
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1.36;
+      font-weight: 560;
+    }
+
+    .mini-ladder {
+      display: grid;
+      gap: 14px;
+    }
+
+    .ladder-step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 15px 16px;
+      border-radius: 8px;
+      background: #f7faff;
+      border: 1px solid #dce7f5;
+      color: var(--ink);
+      font-size: 19px;
+      line-height: 1.2;
+      font-weight: 780;
+    }
+
+    .ladder-index {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: var(--blue);
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 920;
+    }
+
+    .distribution-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .market-table {
+      padding: 26px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .market-row {
+      display: grid;
+      grid-template-columns: 0.78fr 1fr 1fr 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 17px 0;
+      border-top: 1px solid #e6edf6;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.18;
+      font-weight: 730;
+    }
+
+    .market-row.head {
+      padding-top: 0;
+      border-top: 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 920;
+      text-transform: uppercase;
+    }
+
+    .market-row strong {
+      color: var(--navy);
+      font-size: 23px;
+      font-weight: 920;
+    }
+
+    .exposure-card {
+      min-height: 100%;
+      padding: 32px;
+      display: grid;
+      align-content: center;
+      gap: 22px;
+      background: #f2f8ff;
+      border: 1px solid #c9ddf5;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .exposure-card .big {
+      color: var(--blue);
+      font-size: 76px;
+      line-height: 0.95;
+      font-weight: 950;
+    }
+
+    .exposure-card p {
+      color: var(--navy);
+      font-size: 26px;
+      line-height: 1.22;
+      font-weight: 820;
+    }
+
+    .exposure-card span {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.32;
+      font-weight: 620;
+    }
+
+    .debt-map {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 0.95fr 1.1fr 0.95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .debt-column {
+      min-height: 534px;
+      padding: 24px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .debt-column h2 {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+    .debt-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .debt-item {
+      padding: 13px 14px;
+      border-radius: 8px;
+      background: #f7faff;
+      border: 1px solid #dce7f5;
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.22;
+      font-weight: 760;
+    }
+
+    .debt-item.critical {
+      background: var(--pink-soft);
+      border-color: #dfc5d4;
+    }
+
+    .decision-flow {
+      padding: 24px;
+      border-radius: 8px;
+      background: #f2f8ff;
+      border: 1px solid #bdd6fa;
+      box-shadow: var(--shadow);
+    }
+
+    .flow-node {
+      padding: 20px 18px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #cfe0fb;
+      text-align: center;
+      color: var(--navy);
+      font-size: 20px;
+      line-height: 1.2;
+      font-weight: 850;
+    }
+
+    .flow-node strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--blue);
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: 950;
+    }
+
+    .flow-plus {
+      text-align: center;
+      color: var(--muted);
+      font-size: 24px;
+      font-weight: 950;
+      padding: 12px 0;
+    }
+
+    .workstream-grid {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .workstream-card {
+      position: relative;
+      min-height: 355px;
+      padding: 30px 32px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .workstream-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 6px;
+      background: var(--blue);
+    }
+
+    .workstream-card.buyer {
+      background: #f2f8ff;
+      border-color: #c9ddf5;
+    }
+
+    .workstream-card.buyer::before {
+      background: linear-gradient(90deg, var(--blue), #56b6ff);
+    }
+
+    .workstream-card.platform {
+      background: #f3fbf4;
+      border-color: #c5e5cc;
+    }
+
+    .workstream-card.platform::before {
+      background: linear-gradient(90deg, var(--green), var(--teal));
+    }
+
+    .workstream-card.foundation {
+      background: #fff9ed;
+      border-color: #f1d69a;
+    }
+
+    .workstream-card.foundation::before {
+      background: linear-gradient(90deg, var(--orange), var(--gold));
+    }
+
+    .workstream-card h2 {
+      font-size: 32px;
+    }
+
+    .workstream-card p {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.32;
+    }
+
+    .workstream-list {
+      margin-top: 22px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .workstream-item {
+      padding: 11px 14px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(166, 187, 214, 0.54);
+      color: var(--navy);
+      font-size: 17px;
+      line-height: 1.22;
+      font-weight: 820;
+    }
+
+    .transversal-strip {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 260px 1fr 1fr 1fr;
+      gap: 14px;
+      align-items: stretch;
+      padding: 16px 18px;
+      border-radius: 8px;
+      background: #f7f9fd;
+      border: 1px solid #dbe5f1;
+      box-shadow: 0 12px 28px rgba(37, 48, 80, 0.05);
+    }
+
+    .transversal-label {
+      display: grid;
+      align-content: center;
+      color: var(--navy);
+      font-size: 18px;
+      line-height: 1.15;
+      font-weight: 950;
+    }
+
+    .transversal-label span {
+      display: block;
+      margin-bottom: 7px;
+      color: #6a748e;
+      font-size: 11px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .transversal-item {
+      padding: 13px 15px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #dce7f5;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 780;
+    }
+
+    .transversal-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--navy);
+      font-size: 16px;
+      font-weight: 950;
+    }
+
+    .scope-board {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 0.92fr 0.88fr 1.35fr 0.95fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .scope-column {
+      min-height: 584px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .scope-head {
+      padding: 17px 18px;
+      background: var(--navy);
+      color: #ffffff;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.1;
+      font-weight: 950;
+    }
+
+    .scope-column.done .scope-head {
+      background: #4c8f5a;
+    }
+
+    .scope-column.carry .scope-head {
+      background: #b77a13;
+    }
+
+    .scope-column.rank .scope-head {
+      background: var(--blue);
+    }
+
+    .scope-column.no .scope-head {
+      background: #944968;
+    }
+
+    .scope-items {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .scope-item {
+      padding: 12px 13px;
+      border-radius: 8px;
+      background: #f7faff;
+      border: 1px solid #dce7f5;
+      color: var(--navy);
+      font-size: 15px;
+      line-height: 1.22;
+      font-weight: 820;
+    }
+
+    .scope-item span {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--blue);
+      font-size: 10px;
+      line-height: 1;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .bet-layout {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 0.96fr 1.04fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    .proof-card {
+      padding: 30px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .proof-card.blue {
+      background: #f2f8ff;
+      border-color: #c9ddf5;
+    }
+
+    .proof-card h2 {
+      font-size: 32px;
+      margin-bottom: 18px;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .proof-metric {
+      min-height: 142px;
+      padding: 18px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #dce7f5;
+    }
+
+    .proof-metric strong {
+      display: block;
+      color: var(--blue);
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    .proof-metric span {
+      display: block;
+      margin-top: 9px;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.22;
+      font-weight: 760;
+    }
+
+    .gate-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .gate-item {
+      padding: 15px 16px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #dce7f5;
+      box-shadow: 0 8px 18px rgba(37, 48, 80, 0.04);
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.25;
+      font-weight: 760;
+    }
+
+    .gate-item strong {
+      color: var(--navy);
+      font-weight: 950;
+    }
+
+    .path-map {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .path-stage {
+      min-height: 430px;
+      padding: 25px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .path-stage h2 {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .path-node {
+      padding: 15px 16px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      background: #f7faff;
+      border: 1px solid #dce7f5;
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 780;
+    }
+
+    .path-stage.win {
+      background: #f2f8ff;
+      border-color: #c9ddf5;
+    }
+
+    .path-stage.foundation {
+      background: #fff9ed;
+      border-color: #f1d69a;
+    }
+
+    .slide[data-slide="7"] .path-map {
+      margin-top: 22px;
+    }
+
+    .slide[data-slide="7"] .path-stage {
+      min-height: 386px;
+      padding: 22px;
+    }
+
+    .slide[data-slide="7"] .path-stage h2 {
+      margin-bottom: 13px;
+    }
+
+    .slide[data-slide="7"] .path-node {
+      padding: 12px 14px;
+      margin-bottom: 9px;
+      font-size: 16px;
+    }
+
+    .slide[data-slide="7"] .metric-row {
+      margin-top: 20px;
+    }
+
+    .slide[data-slide="7"] .metric-card {
+      min-height: 132px;
+      padding: 20px 22px;
+    }
+
+    .slide[data-slide="7"] .metric-card .value {
+      font-size: 42px;
+    }
+
+    .slide[data-slide="7"] .metric-card .label {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    .slide[data-slide="7"] .metric-card .sub {
+      margin-top: 6px;
+      font-size: 13px;
+    }
+
+    .slide[data-slide="8"] .slide-body {
+      padding-top: 54px;
+    }
+
+    .slide[data-slide="8"] h1 {
+      max-width: 1320px;
+      font-size: 45px;
+    }
+
+    .slide[data-slide="8"] .rule {
+      margin: 24px 0 20px;
+    }
+
+    .concept-layout {
+      position: relative;
+      height: 650px;
+      border-radius: 8px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.52)),
+        #eef5ff;
+      border: 1px solid #cfddf0;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .concept-layout.mobile-only {
+      background:
+        radial-gradient(circle at 34% 18%, rgba(31, 119, 255, 0.14), rgba(31, 119, 255, 0) 420px),
+        linear-gradient(180deg, #f7fbff, #eef5ff);
+    }
+
+    .concept-layout.desktop-only {
+      height: 645px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.90), rgba(245, 249, 255, 0.80)),
+        #eef5ff;
+    }
+
+    .concept-desktop-frame {
+      position: absolute;
+      right: 34px;
+      top: 38px;
+      width: 1120px;
+      height: 520px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid rgba(207, 221, 240, 0.88);
+      box-shadow: 0 26px 70px rgba(37, 48, 80, 0.15);
+    }
+
+    .desktop-only .concept-desktop-frame {
+      left: 54px;
+      right: 54px;
+      top: 50px;
+      width: auto;
+      height: 520px;
+    }
+
+    .concept-desktop-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .concept-phone-frame {
+      position: absolute;
+      left: 62px;
+      bottom: 28px;
+      width: 360px;
+      height: 590px;
+      padding: 10px;
+      overflow: hidden;
+      border-radius: 30px;
+      background: #ffffff;
+      border: 1px solid rgba(207, 221, 240, 0.92);
+      box-shadow: 0 32px 80px rgba(20, 37, 78, 0.24);
+      z-index: 3;
+    }
+
+    .mobile-only .concept-phone-frame {
+      left: 162px;
+      bottom: 20px;
+      width: 420px;
+      height: 620px;
+      border-radius: 34px;
+      box-shadow: 0 36px 90px rgba(20, 37, 78, 0.28);
+    }
+
+    .concept-phone-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 22px;
+    }
+
+    .concept-callout {
+      position: absolute;
+      z-index: 4;
+      max-width: 290px;
+      padding: 13px 15px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid #cfe0fb;
+      box-shadow: 0 14px 34px rgba(37, 48, 80, 0.12);
+      color: var(--navy);
+      font-size: 16px;
+      line-height: 1.18;
+      font-weight: 860;
+    }
+
+    .concept-callout span {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .concept-callout.one {
+      left: 430px;
+      top: 54px;
+    }
+
+    .concept-callout.two {
+      right: 82px;
+      top: 404px;
+    }
+
+    .concept-callout.three {
+      left: 470px;
+      bottom: 74px;
+    }
+
+    .mobile-only .concept-callout.one {
+      left: 640px;
+      top: 112px;
+      max-width: 360px;
+    }
+
+    .mobile-only .concept-callout.two {
+      left: 640px;
+      right: auto;
+      top: 300px;
+      max-width: 380px;
+    }
+
+    .mobile-only .concept-callout.three {
+      left: 640px;
+      bottom: 126px;
+      max-width: 390px;
+    }
+
+    .desktop-only .concept-callout.one {
+      left: 86px;
+      top: 582px;
+      max-width: 450px;
+    }
+
+    .desktop-only .concept-callout.two {
+      right: 86px;
+      top: 582px;
+      max-width: 450px;
+    }
+
+    .desktop-only .concept-callout.three {
+      display: none;
+    }
+
+    .artifact-links {
+      position: absolute;
+      right: 28px;
+      bottom: 22px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      max-width: 680px;
+    }
+
+    .artifact-links span {
+      color: #6a748e;
+      font-size: 11px;
+      line-height: 1.1;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .artifact-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 9px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #cfe0fb;
+      color: var(--blue);
+      font-size: 12px;
+      line-height: 1.1;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .routing-board {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: 0.98fr 1.04fr 0.98fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .routing-col {
+      min-height: 545px;
+      padding: 26px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .routing-col h2 {
+      font-size: 29px;
+      margin-bottom: 17px;
+    }
+
+    .route-option {
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 13px;
+      align-items: start;
+      padding: 15px 14px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      background: #f7faff;
+      border: 1px solid #dce7f5;
+    }
+
+    .route-index {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      background: var(--blue);
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 950;
+    }
+
+    .route-option h3 {
+      font-size: 21px;
+      margin-bottom: 5px;
+    }
+
+    .route-option p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.24;
+      font-weight: 650;
+    }
+
+    .scorecard-board {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .score-section {
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .score-head {
+      display: grid;
+      grid-template-columns: 1.08fr 0.78fr 0.86fr;
+      gap: 12px;
+      align-items: center;
+      padding: 13px 16px;
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 14px;
+      line-height: 1.15;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .score-section.buyer .score-head {
+      background: var(--blue);
+    }
+
+    .score-section.platform .score-head {
+      background: #3b9556;
+    }
+
+    .score-section.foundation .score-head {
+      background: #9a6409;
+    }
+
+    .score-section.north .score-head {
+      background: #944968;
+    }
+
+    .score-row {
+      display: grid;
+      grid-template-columns: 1.08fr 0.78fr 0.86fr;
+      gap: 12px;
+      align-items: center;
+      padding: 11px 16px;
+      border-top: 1px solid #e6edf6;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.18;
+      font-weight: 720;
+    }
+
+    .score-row span:nth-child(2),
+    .score-row span:nth-child(3) {
+      color: var(--navy);
+      font-weight: 900;
+    }
+
+    .proof-lanes {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .proof-lane {
+      min-height: 318px;
+      padding: 28px 26px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .proof-lane span {
+      display: inline-flex;
+      margin-bottom: 20px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #edf5ff;
+      color: var(--blue);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .proof-lane h2 {
+      margin-bottom: 14px;
+      font-size: 33px;
+      line-height: 1.08;
+    }
+
+    .proof-lane p {
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1.28;
+      font-weight: 650;
+    }
+
+    .north-guardrail {
+      margin-top: 24px;
+      padding: 24px 26px;
+      border-radius: 8px;
+      border: 1px solid #c9ddf5;
+      background: #f3f8ff;
+      box-shadow: var(--shadow);
+    }
+
+    .north-guardrail h2 {
+      margin-bottom: 16px;
+      font-size: 28px;
+    }
+
+    .guardrail-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .guardrail-item {
+      padding: 15px 16px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #dce7f5;
+      color: var(--navy);
+      font-size: 18px;
+      line-height: 1.18;
+      font-weight: 850;
+    }
+
+    .guardrail-item span {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .decision-board {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .decision-card {
+      min-height: 430px;
+      padding: 28px 24px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .decision-card h2 {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .decision-card p,
+    .decision-line {
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.3;
+      font-weight: 650;
+    }
+
+    .decision-lines {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .decision-line {
+      padding: 14px 15px;
+      border-radius: 8px;
+      background: #f7faff;
+      border: 1px solid #dce7f5;
+    }
+
+    .controls {
+      position: absolute;
+      right: 34px;
+      bottom: 34px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 50;
+      opacity: 0.42;
+      transition: opacity 160ms ease;
+    }
+
+    .deck:hover .controls,
+    .controls:focus-within {
+      opacity: 1;
+    }
+
+    .controls button {
+      min-width: 46px;
+      height: 44px;
+      border-radius: 8px;
+      border: 1px solid rgba(45, 54, 95, 0.25);
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--navy);
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .controls .counter {
+      min-width: 66px;
+      text-align: center;
+      color: var(--navy);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(45, 54, 95, 0.25);
+      border-radius: 8px;
+      padding: 11px 10px;
+      font-size: 15px;
+      font-weight: 850;
+    }
+
+    @media print {
+      html,
+      body {
+        overflow: visible;
+        background: #ffffff;
+      }
+
+      .viewport {
+        position: static;
+        display: block;
+        background: #ffffff;
+      }
+
+      .deck {
+        transform: none !important;
+        width: 1920px;
+        height: auto;
+        box-shadow: none;
+      }
+
+      .slide {
+        position: relative;
+        opacity: 1;
+        visibility: visible;
+        page-break-after: always;
+      }
+
+      .controls {
+        display: none;
+      }
+    }
+  </style>
+
+<style>
+  .vj-protected-content {
+    display: none;
+  }
+
+  body.vj-unlocked .vj-protected-content {
+    display: block;
+  }
+
+  body.vj-unlocked .vj-lock {
+    display: none;
+  }
+
+  .vj-lock {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: #eef3f8;
+    color: #111827;
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .vj-lock-card {
+    width: min(100%, 380px);
+    background: #ffffff;
+    border: 1px solid #d8dee8;
+    border-radius: 10px;
+    padding: 22px;
+    box-shadow: 0 16px 40px rgba(17, 24, 39, 0.1);
+  }
+
+  .vj-lock-card h1 {
+    margin: 0 0 8px;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+
+  .vj-lock-card p {
+    margin: 0 0 16px;
+    color: #667085;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .vj-lock-form {
+    display: grid;
+    gap: 10px;
+  }
+
+  .vj-lock-form input {
+    height: 44px;
+    border: 1px solid #d8dee8;
+    border-radius: 8px;
+    padding: 0 12px;
+    font: inherit;
+  }
+
+  .vj-lock-form button {
+    height: 44px;
+    border: 0;
+    border-radius: 8px;
+    background: #0066e5;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .vj-lock-error {
+    min-height: 18px;
+    color: #b42318;
+    font-size: 12px;
+    font-weight: 700;
+  }
+</style>
+
+</head>
+<body>
+
+<section class="vj-lock" aria-label="Protected page">
+  <form class="vj-lock-card vj-lock-form" data-vj-lock>
+    <h1>Wallet Q3 2026 Product Strategy Deck</h1>
+    <p>Ingresá la contraseña para ver este material.</p>
+    <input type="password" autocomplete="current-password" placeholder="Contraseña" aria-label="Contraseña" data-vj-password>
+    <button type="submit">Entrar</button>
+    <div class="vj-lock-error" data-vj-error></div>
+  </form>
+</section>
+<script>
+(() => {
+  const expected = "3bb534922618f14b978bd59c9d98802604a69587847f610f3b0efe1a560f43d0";
+  const key = "designer-vj-auth";
+  const enc = new TextEncoder();
+  const toHex = buffer => Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+  const unlock = () => document.body.classList.add("vj-unlocked");
+  if (sessionStorage.getItem(key) === expected) unlock();
+  document.querySelector("[data-vj-lock]")?.addEventListener("submit", async event => {
+    event.preventDefault();
+    const input = document.querySelector("[data-vj-password]");
+    const error = document.querySelector("[data-vj-error]");
+    const digest = await crypto.subtle.digest("SHA-256", enc.encode(input.value));
+    const actual = toHex(digest);
+    if (actual === expected) {
+      sessionStorage.setItem(key, expected);
+      unlock();
+      input.value = "";
+    } else {
+      error.textContent = "Contraseña incorrecta.";
+      input.select();
+    }
+  });
+})();
+</script>
+
+<div class="vj-protected-content">
+
+  <div class="viewport">
+    <main class="deck" aria-label="Wallet Q3 2026 Product Strategy HTML deck">
+      <!-- Metrics and claims are grounded in outputs/2026-05/strategy/wallet-product-strategy-q3-2026-draft.md, reference/KPIs/wallet-kpis.md, reference/nuvem-context.md, Q2 Wallet strategy PDF, compiled Wallet feature READMEs and Operating Memory problem-memory pages. -->
+
+      <section class="slide active" data-slide="1">
+        <div class="top-strip"></div>
+        <div class="title-bar">Q3 must prove Wallet turns exposure into reliable GMV adoption</div>
+        <div class="slide-body">
+          <h1><strong>The quarter is not about more reach.</strong> It is about proving that recognized checkout creates merchant conversion, GPV concentration and safer adoption at scale.</h1>
+          <div class="rule"></div>
+          <div class="thesis-layout">
+            <div class="thesis-card">
+              <h2>Wallet already has the structural right to win</h2>
+              <p>It owns portable identity, saved payment data, checkout acceleration and the Nuvem Pago / Pago Nube path in one system. Q3 has to turn that advantage into measurable merchant value.</p>
+              <div class="mini-ladder">
+                <div class="ladder-step"><span class="ladder-index">1</span><span>Recognize more buyers before the checkout becomes manual.</span></div>
+                <div class="ladder-step"><span class="ladder-index">2</span><span>Move eligible buyers into the Wallet-owned checkout path.</span></div>
+                <div class="ladder-step"><span class="ladder-index">3</span><span>Remove payment friction only when risk and provider contracts are ready.</span></div>
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="metric-card green">
+                <span class="value">64%</span>
+                <span class="label">AR transactions completed through Wallet</span>
+                <span class="sub">March to May 2026, +2.5 pp in the Q3 draft.</span>
+              </div>
+              <div class="metric-card">
+                <span class="value">51.8%</span>
+                <span class="label">BR transactions completed through Wallet</span>
+                <span class="sub">March to May 2026, +3.9 pp in the Q3 draft.</span>
+              </div>
+              <div class="metric-card orange">
+                <span class="value">~8.5%</span>
+                <span class="label">buyers at EC-active NP/PN stores advance through EC</span>
+                <span class="sub">Current Q3 strategy draft denominator: EC-active NP/PN stores.</span>
+              </div>
+              <div class="metric-card pink">
+                <span class="value">+3.13 pp</span>
+                <span class="label">BR saved-card cart approval from no-CVV</span>
+                <span class="sub">A/B test among buyers paying with saved card on Nuvem Pago.</span>
+              </div>
+            </div>
+          </div>
+          <div class="caption">Scope note: first version uses documented baselines only; no live Product Intelligence refresh.</div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="2">
+        <div class="top-strip"></div>
+        <div class="title-bar">Wallet already has distribution, but the owned checkout path is still small</div>
+        <div class="slide-body">
+          <h1><strong>Distribution is no longer the main constraint.</strong> Wallet has users, cards and merchant activation, but Express Checkout is still too small to prove the Wallet-owned experience.</h1>
+          <div class="rule"></div>
+          <div class="distribution-grid">
+            <div class="market-table">
+              <div class="market-row head">
+                <span>Market</span><span>Consented base</span><span>Valid saved cards</span><span>Wallet stores</span>
+              </div>
+              <div class="market-row">
+                <strong>BR</strong><span>18.1M users</span><span>4.8M cards, 26.3%</span><span>134.6K stores, 87.9%</span>
+              </div>
+              <div class="market-row">
+                <strong>AR</strong><span>8.5M users</span><span>1.9M cards, 22.8%</span><span>79.1K stores, 88.1%</span>
+              </div>
+              <div class="market-row">
+                <strong>MX</strong><span>TBD for consented base</span><span>TBD for saved cards</span><span>8.8K stores, 86.0%</span>
+              </div>
+            </div>
+            <div class="exposure-card">
+              <div class="big">~95%+</div>
+              <p>NP/PN GPV share inside Express Checkout after payment simplification.</p>
+              <span>That makes EC strategically important, but adoption quality must be proven through conversion, not only through more traffic.</span>
+            </div>
+          </div>
+          <div class="metric-row">
+            <div class="metric-card">
+              <span class="value">~82.6%</span>
+              <span class="label">global Wallet login rate</span>
+              <span class="sub">Current draft baseline.</span>
+            </div>
+            <div class="metric-card orange">
+              <span class="value">~32.76%</span>
+              <span class="label">login persistence</span>
+              <span class="sub">Up from 30.5% over 12 weeks.</span>
+            </div>
+            <div class="metric-card green">
+              <span class="value">23.1%</span>
+              <span class="label">1-tap share in NP/PN stores</span>
+              <span class="sub">Jan 2026 KPI file, Wallet orders in NP/PN stores.</span>
+            </div>
+            <div class="metric-card pink">
+              <span class="value">TBD</span>
+              <span class="label">EC started-to-paid conversion</span>
+              <span class="sub">Requires completed and exited EC instrumentation.</span>
+            </div>
+          </div>
+          <div class="caption">Scope note: May 2026 strict-consent and merchant snapshots, Jan-Mar 2026 KPI baselines, and Q3 EC readouts.</div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="3">
+        <div class="top-strip"></div>
+        <div class="title-bar">Growth is constrained by parity debt, not by one missing feature</div>
+        <div class="slide-body">
+          <h1><strong>The blocker is the number of real checkout cases Wallet must route safely.</strong> EC cannot become default if Core-only capabilities silently break totals, payment state or store benefits.</h1>
+          <div class="rule"></div>
+          <div class="debt-map">
+            <div class="debt-column">
+              <h2>User-facing friction</h2>
+              <div class="debt-list">
+                <div class="debt-item">CVV adds 34 seconds and invalid CVV explains 1.3% of saved-card payment failures.</div>
+                <div class="debt-item">Most BR and AR buyers still rely on OTP to log in.</div>
+                <div class="debt-item">EC must feel like a final checkout, with clear total, CTA and saved-data confidence.</div>
+                <div class="debt-item">Cross-store login on iOS needs a first-party Nuvem path.</div>
+              </div>
+            </div>
+            <div class="decision-flow">
+              <div class="flow-node"><strong>Core adds capability</strong>UI, validation, summary, total, payment payload or provider behavior changes.</div>
+              <div class="flow-plus">then EC needs an explicit product decision</div>
+              <div class="flow-node"><strong>Decision</strong>Support in EC, route buyer to Core, or mark the store/cart/user ineligible.</div>
+              <div class="flow-plus">otherwise adoption corrupts the readout</div>
+              <div class="flow-node"><strong>Q3 proof</strong>More EC usage with stable conversion, payment success, GPV mix and fallback reasons.</div>
+            </div>
+            <div class="debt-column">
+              <h2>Capability debt</h2>
+              <div class="debt-list">
+                <div class="debt-item critical">Gift Card, Store Credit, kits and bundles need their own EC support or fallback.</div>
+                <div class="debt-item critical">Subscriptions and mixed carts carry card-token and lifecycle risk.</div>
+                <div class="debt-item">B2B, international purchases and unsupported apps must stay out of default EC.</div>
+                <div class="debt-item">3DS, PSP iframe, provider routing and installments need contract-level checks.</div>
+              </div>
+            </div>
+          </div>
+          <div class="caption">Scope note: reflects current Q3 Wallet scope and known Express Checkout edge cases.</div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="4">
+        <div class="top-strip"></div>
+        <div class="title-bar">Q3 splits Wallet into conversion bets and operating foundations</div>
+        <div class="slide-body">
+          <h1><strong>The strategy is three workstreams, not a feature list.</strong> Buyer conversion moves the surface; platform enablement expands the addressable path; foundations make the readout trustworthy.</h1>
+          <div class="rule"></div>
+          <div class="workstream-grid">
+            <div class="workstream-card buyer">
+              <h2>User-facing checkout bets</h2>
+              <p>Move recognized buyers into a faster final purchase flow and remove the friction that directly changes payment completion.</p>
+              <div class="workstream-list">
+                <div class="workstream-item">Risk-based 1-tap without CVV</div>
+                <div class="workstream-item">Single primary checkout CTA</div>
+                <div class="workstream-item">Wallet-like EC UI with sticky final CTA</div>
+                <div class="workstream-item">Saved-data confidence and payment state clarity</div>
+              </div>
+            </div>
+            <div class="workstream-card platform">
+              <h2>Merchant and platform enablement</h2>
+              <p>Make Wallet useful across store contexts without claiming ownership of every Core Checkout capability.</p>
+              <div class="workstream-list">
+                <div class="workstream-item">Passwordless storefront login across themes</div>
+                <div class="workstream-item">Checkout identity provider path</div>
+                <div class="workstream-item">EC eligibility, NubeSDK and app readiness</div>
+                <div class="workstream-item">Observable fallback to Core when EC is not the right path</div>
+              </div>
+            </div>
+            <div class="workstream-card foundation">
+              <h2>Operating foundations</h2>
+              <p>Protect risk, compliance, provider correctness and measurement before scaling the owned checkout path.</p>
+              <div class="workstream-list">
+                <div class="workstream-item">TMX and Neblina decisioning</div>
+                <div class="workstream-item">Provider payload and 3DS checks</div>
+                <div class="workstream-item">Fallback reason instrumentation</div>
+                <div class="workstream-item">Parity queue and no-go governance</div>
+              </div>
+            </div>
+          </div>
+          <div class="transversal-strip">
+            <div class="transversal-label"><span>Transversal rule</span>Do not reframe foundations as buyer features.</div>
+            <div class="transversal-item"><strong>Risk and compliance</strong>Only change buyer friction when fraud, LGPD and security paths are ready.</div>
+            <div class="transversal-item"><strong>Provider readiness</strong>Payment state must match UI, internal records and provider requests.</div>
+            <div class="transversal-item"><strong>Measurement</strong>Adoption is a lever. Merchant CVR uplift is the proof.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="5">
+        <div class="top-strip"></div>
+        <div class="title-bar">The stack rank protects merchant CVR without expanding checkout ownership</div>
+        <div class="slide-body">
+          <h1><strong>Q3 scope is intentionally narrow.</strong> It prioritizes the few paths that can prove conversion while keeping Core-only edge cases out of the default Wallet path.</h1>
+          <div class="rule"></div>
+          <div class="scope-board">
+            <div class="scope-column done">
+              <div class="scope-head">Done or closing</div>
+              <div class="scope-items">
+                <div class="scope-item"><span>Proof</span>No-CVV approval uplift validated in BR and AR.</div>
+                <div class="scope-item"><span>EC</span>Lightweight EC and NP/PN-only options near rollout.</div>
+                <div class="scope-item"><span>Fast path</span>Autocomplete fail rate cut from 4.4% to about 1%.</div>
+                <div class="scope-item"><span>Security</span>Critical authentication and order-access risks closed.</div>
+                <div class="scope-item"><span>Identity</span>iOS cross-store login persistence path shipped.</div>
+              </div>
+            </div>
+            <div class="scope-column carry">
+              <div class="scope-head">Carry-over</div>
+              <div class="scope-items">
+                <div class="scope-item"><span>Risk</span>TMX and Neblina gates for no-CVV.</div>
+                <div class="scope-item"><span>Security</span>Fingerprint challenge for hijacking risk.</div>
+                <div class="scope-item"><span>Auth</span>Passkeys with OTP fallback.</div>
+                <div class="scope-item"><span>Persistence</span>12 to 24-month login path with Security.</div>
+              </div>
+            </div>
+            <div class="scope-column rank">
+              <div class="scope-head">Q3 stack rank</div>
+              <div class="scope-items">
+                <div class="scope-item"><span>P0</span>1-tap without CVV for low-risk saved cards.</div>
+                <div class="scope-item"><span>P1</span>One checkout CTA, routed by buyer context.</div>
+                <div class="scope-item"><span>P2</span>Wallet-like EC UI: CTA, total, summary and theme.</div>
+                <div class="scope-item"><span>P3</span>Passwordless storefront login, priority still to confirm.</div>
+              </div>
+            </div>
+            <div class="scope-column no">
+              <div class="scope-head">No-gos and next horizon</div>
+              <div class="scope-items">
+                <div class="scope-item"><span>No-go</span>Google SSO as checkout flow.</div>
+                <div class="scope-item"><span>No-go</span>Connected store and Wallet accounts.</div>
+                <div class="scope-item"><span>No-go</span>Rewards, guarantees and Black Friday planning.</div>
+                <div class="scope-item"><span>Boundary</span>Complex carts and benefits stay out until capability decisions are explicit.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="6">
+        <div class="top-strip"></div>
+        <div class="title-bar">No-CVV is the highest-conviction buyer-facing conversion bet</div>
+        <div class="slide-body">
+          <h1><strong>The question moved from whether no-CVV works to how we scale it safely.</strong> The lift is real in saved-card flows, but rollout depends on risk orchestration and provider correctness.</h1>
+          <div class="rule"></div>
+          <div class="bet-layout">
+            <div class="proof-card blue">
+              <h2>What Q3 can now build on</h2>
+              <div class="proof-grid">
+                <div class="proof-metric">
+                  <strong>+3.13 pp</strong>
+                  <span>BR saved-card cart approval, 89.33% to 92.46%, 95% CI +0.93 to +5.35 pp.</span>
+                </div>
+                <div class="proof-metric">
+                  <strong>~+4 pp</strong>
+                  <span>AR Pago Nube approval lift, enough to stop extending the test.</span>
+                </div>
+                <div class="proof-metric">
+                  <strong>34s</strong>
+                  <span>CVV adds 28% of total checkout time in saved-card flows.</span>
+                </div>
+                <div class="proof-metric">
+                  <strong>1.3%</strong>
+                  <span>saved-card payments fail due to invalid CVV.</span>
+                </div>
+              </div>
+            </div>
+            <div class="proof-card">
+              <h2>What must be true before scale</h2>
+              <div class="gate-list">
+                <div class="gate-item"><strong>Risk decisioning:</strong> TMX provides device/session signals and Neblina decides when to skip or require CVV.</div>
+                <div class="gate-item"><strong>User-facing fallback:</strong> if antifraud needs CVV, Wallet asks after the payment attempt instead of creating a silent rejection path.</div>
+                <div class="gate-item"><strong>Provider contract:</strong> installments, authorization state and PSP payloads must reconcile with UI and internal records.</div>
+                <div class="gate-item"><strong>Delayed guardrail:</strong> chargebacks lag 30 to 90 days, so scale needs staged exposure, issuer/acquirer monitoring and a kill switch.</div>
+                <div class="gate-item"><strong>Readout discipline:</strong> approval, fraud, retries and generic rejection buckets are separate signals.</div>
+              </div>
+            </div>
+          </div>
+          <div class="caption">Scope note: no-CVV metrics are limited to saved-card payment flows and should not be read as global checkout CVR uplift.</div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="7">
+        <div class="top-strip"></div>
+        <div class="title-bar">Express Checkout wins only when recognized buyers can complete without fallback</div>
+        <div class="slide-body">
+          <h1><strong>Defaulting EC is a conversion bet only if the buyer can finish there.</strong> A single CTA should route by context, preserve Core when needed and make the Wallet path feel final.</h1>
+          <div class="rule"></div>
+          <div class="path-map">
+            <div class="path-stage">
+              <h2>Entry</h2>
+              <div class="path-node">Recognized buyer at cart sees one primary checkout action.</div>
+              <div class="path-node">Logged-out buyer remains in Core first.</div>
+              <div class="path-node">Buyer who logs in from Core can move into EC when eligible.</div>
+              <div class="path-node">iOS cross-store persistence uses first-party Nuvem domain.</div>
+            </div>
+            <div class="path-stage win">
+              <h2>Wallet-owned close</h2>
+              <div class="path-node">Saved address and payment open above the fold on mobile.</div>
+              <div class="path-node">Sticky final CTA shows total and purchase confidence.</div>
+              <div class="path-node">No-CVV and installment defaults remove form work when risk allows.</div>
+              <div class="path-node">NP/PN rails remain the dominant payment path inside EC.</div>
+            </div>
+            <div class="path-stage foundation">
+              <h2>Fallback logic</h2>
+              <div class="path-node">Unsupported capability routes to Core with preserved cart state.</div>
+              <div class="path-node">Fallback reason is observable before it pollutes adoption metrics.</div>
+              <div class="path-node">EC eligibility is store, cart, user, app and PSP specific.</div>
+              <div class="path-node">Conversion guardrail decides whether defaulting expands.</div>
+            </div>
+          </div>
+          <div class="metric-row">
+            <div class="metric-card orange">
+              <span class="value">~8.5%</span>
+              <span class="label">current EC usage in Q3 draft</span>
+              <span class="sub">Buyers at EC-active NP/PN stores advancing through EC.</span>
+            </div>
+            <div class="metric-card">
+              <span class="value">~40%</span>
+              <span class="label">Q3 ambition for EC usage</span>
+              <span class="sub">Target to validate through single primary checkout CTA.</span>
+            </div>
+            <div class="metric-card green">
+              <span class="value">~95%+</span>
+              <span class="label">NP/PN GPV share inside EC</span>
+              <span class="sub">Post payment simplification baseline.</span>
+            </div>
+            <div class="metric-card pink">
+              <span class="value">TBD</span>
+              <span class="label">EC started-to-paid conversion</span>
+              <span class="sub">Measurement gap to close before reading defaulting quality.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="8">
+        <div class="top-strip"></div>
+        <div class="title-bar">Mobile Express Checkout should feel like a Wallet purchase, not a checkout step</div>
+        <div class="slide-body">
+          <h1><strong>The mobile concept makes the close feel owned by Wallet.</strong> Saved identity, payment and total stay visible until the final action.</h1>
+          <div class="rule"></div>
+          <div class="concept-layout mobile-only">
+            <div class="concept-phone-frame">
+              <img src="./assets/express-checkout-wallet-mobile.png" alt="Mobile Express Checkout wallet-like concept with saved account, address, shipping, coupon, saved card, total and final purchase CTA">
+            </div>
+            <div class="concept-callout one"><span>Wallet surface</span>Account, address, shipping and payment read as one saved-data card.</div>
+            <div class="concept-callout two"><span>Purchase clarity</span>The total stays attached to the final action, not buried in a summary.</div>
+            <div class="concept-callout three"><span>Strategic role</span>This is the buyer-facing expression of making EC the default path for recognized users.</div>
+            <div class="artifact-links">
+              <span>Links</span>
+              <a href="https://express-checkout-gold.vercel.app/next?footer=off&amp;payFlow=compact&amp;defaults=price-down&amp;escapeSheet=on&amp;preset=nuvem-blue-bottom&amp;header=brand&amp;themeMode=wallet" target="_blank" rel="noreferrer">Prototype</a>
+              <a href="../../../../reference/PRDs/Wallet/Pitch_%20Lightweight%20Express%20Checkout%202026.pdf">PRD</a>
+              <a href="../../../2026-05/strategy/wallet-product-strategy-q3-2026-draft.md">Strategy</a>
+              <a href="../../../../reference/Compiled%20Features/Wallet/lightweight-express-checkout/README.md">Feature</a>
+            </div>
+          </div>
+          <div class="caption">Scope note: prototype capture from the wallet theme URL shared for this deck iteration.</div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="9">
+        <div class="top-strip"></div>
+        <div class="title-bar">Desktop Express Checkout should scale the same Wallet logic without copying Core</div>
+        <div class="slide-body">
+          <h1><strong>The desktop concept keeps checkout scannable.</strong> The purchase surface stays simple while the order summary moves into a supporting role.</h1>
+          <div class="rule"></div>
+          <div class="concept-layout desktop-only">
+            <div class="concept-desktop-frame">
+              <img src="./assets/express-checkout-wallet-desktop.png" alt="Desktop Express Checkout wallet-like concept with one-page checkout and order summary">
+            </div>
+            <div class="concept-callout one"><span>Same model</span>Saved data stays in the primary purchase column.</div>
+            <div class="concept-callout two"><span>Different viewport</span>Summary supports the decision without taking over the checkout.</div>
+          </div>
+          <div class="caption">Scope note: desktop capture from the same wallet-theme prototype state.</div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="10">
+        <div class="top-strip"></div>
+        <div class="title-bar">Parity debt needs capability-level routing, not generic support</div>
+        <div class="slide-body">
+          <h1><strong>Every Core-only capability needs an explicit routing policy.</strong> Q3 should prevent the fast path from becoming a worse checkout for stores with benefits or complex payment cases.</h1>
+          <div class="rule"></div>
+          <div class="routing-board">
+            <div class="routing-col">
+              <h2>Trigger the decision</h2>
+              <div class="debt-list">
+                <div class="debt-item">New UI, modal, input, selector or message in Core.</div>
+                <div class="debt-item">New total, discount, value instrument or payment-combination rule.</div>
+                <div class="debt-item">Provider, 3DS, iframe, redirect or PSP-specific behavior changes.</div>
+                <div class="debt-item">Store/account capability becomes a migration blocker.</div>
+              </div>
+            </div>
+            <div class="routing-col">
+              <h2>Choose one policy</h2>
+              <div class="route-option">
+                <span class="route-index">1</span>
+                <div><h3>Support in EC</h3><p>Build equivalent UI, state, validation, summary, payload and monitoring.</p></div>
+              </div>
+              <div class="route-option">
+                <span class="route-index">2</span>
+                <div><h3>Route to Core</h3><p>Keep buyer in the supported checkout path and make the fallback reason visible.</p></div>
+              </div>
+              <div class="route-option">
+                <span class="route-index">3</span>
+                <div><h3>Mark ineligible</h3><p>Do not show EC for affected stores, carts, users, apps or PSPs.</p></div>
+              </div>
+            </div>
+            <div class="routing-col">
+              <h2>Protect the readout</h2>
+              <div class="debt-list">
+                <div class="debt-item critical">Gift Card and Store Credit can change totals and benefits.</div>
+                <div class="debt-item critical">Subscriptions and recurring payments need a separate card-token contract.</div>
+                <div class="debt-item">Kits and bundles need an equivalent line-item representation.</div>
+                <div class="debt-item">B2B and international cases stay outside the default path until scoped.</div>
+              </div>
+            </div>
+          </div>
+          <div class="caption">Scope note: this is a strategic routing policy, not a commitment to support every Core capability in EC during Q3.</div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="11">
+        <div class="top-strip"></div>
+        <div class="title-bar">Q3 should prove adoption quality before claiming North Star movement</div>
+        <div class="slide-body">
+          <h1><strong>The readout should stay simple.</strong> Wallet needs three leading proofs before Merchant CVR Uplift becomes a credible Q3 story.</h1>
+          <div class="rule"></div>
+          <div class="proof-lanes">
+            <div class="proof-lane">
+              <span>Proof 1</span>
+              <h2>Conversion improves without hiding friction.</h2>
+              <p>No-CVV approval holds beyond tests, while EC started-to-paid conversion becomes instrumented instead of inferred.</p>
+            </div>
+            <div class="proof-lane">
+              <span>Proof 2</span>
+              <h2>Adoption grows with completion quality.</h2>
+              <p>EC moves from the ~8.5% draft read toward the ~40% ambition only if fallback reasons and NP/PN mix stay healthy.</p>
+            </div>
+            <div class="proof-lane">
+              <span>Proof 3</span>
+              <h2>Foundations are ready before scale.</h2>
+              <p>Login persistence, OTP pressure, provider contracts, TMX, Neblina and monitoring become rollout gates.</p>
+            </div>
+          </div>
+          <div class="north-guardrail">
+            <h2>Do not declare North Star impact until the guardrails hold.</h2>
+            <div class="guardrail-grid">
+              <div class="guardrail-item"><span>Merchant CVR</span>AR 1-2%, BR 2-3% goal still to prove.</div>
+              <div class="guardrail-item"><span>Share of Wallet</span>AR 64%, BR 51.8% should not be raw exposure.</div>
+              <div class="guardrail-item"><span>Risk lag</span>Chargebacks and fraud need 30-90d monitoring.</div>
+              <div class="guardrail-item"><span>Boundary</span>No-go list stays protected as EC scales.</div>
+            </div>
+          </div>
+          <div class="caption">Scope note: targets are Q3 ambitions or goals from the strategy draft, not forecasts. TBD marks measurement gaps that must be closed.</div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="12">
+        <div class="top-strip"></div>
+        <div class="title-bar">Decision: approve the scope, protect the no-gos, and measure readiness before scale</div>
+        <div class="slide-body">
+          <h1><strong>The alignment ask is not "ship everything."</strong> It is to approve the few bets that can prove Wallet's merchant value and keep the default path honest.</h1>
+          <div class="rule"></div>
+          <div class="decision-board">
+            <div class="decision-card">
+              <h2>Approve</h2>
+              <p>Q3 should lead with no-CVV, single primary checkout CTA and EC UI as the conversion bets.</p>
+              <div class="decision-lines">
+                <div class="decision-line">Passwordless remains enablement.</div>
+                <div class="decision-line">Foundations stay attached to rollout gates.</div>
+              </div>
+            </div>
+            <div class="decision-card">
+              <h2>Protect</h2>
+              <p>Do not expand EC ownership into every Core Checkout edge case by default.</p>
+              <div class="decision-lines">
+                <div class="decision-line">No-gos remain explicit.</div>
+                <div class="decision-line">Unsupported cases route intentionally.</div>
+              </div>
+            </div>
+            <div class="decision-card">
+              <h2>Measure</h2>
+              <p>Read leading proof before declaring Merchant CVR Uplift.</p>
+              <div class="decision-lines">
+                <div class="decision-line">EC usage plus started-to-paid conversion.</div>
+                <div class="decision-line">No-CVV quality plus fallback reasons.</div>
+              </div>
+            </div>
+            <div class="decision-card">
+              <h2>Trade off</h2>
+              <p>Defaulting EC increases strategic leverage and operational risk at the same time.</p>
+              <div class="decision-lines">
+                <div class="decision-line">If conversion does not hold, route back.</div>
+                <div class="decision-line">If risk is not ready, no-CVV stays staged.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="controls" aria-label="Slide controls">
+        <button type="button" data-prev aria-label="Previous slide">&lt;</button>
+        <div class="counter" aria-live="polite">1 / 12</div>
+        <button type="button" data-next aria-label="Next slide">&gt;</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const deck = document.querySelector(".deck");
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const counter = document.querySelector(".counter");
+    let current = 0;
+
+    function fitStage() {
+      const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      document.documentElement.style.setProperty("--scale", String(scale));
+    }
+
+    function showSlide(index, updateHash = true) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle("active", slideIndex === current);
+      });
+      counter.textContent = `${current + 1} / ${slides.length}`;
+      if (updateHash) {
+        history.replaceState(null, "", `#${current + 1}`);
+      }
+    }
+
+    function fromHash() {
+      const raw = window.location.hash.replace("#", "");
+      const parsed = Number.parseInt(raw, 10);
+      if (Number.isFinite(parsed)) {
+        showSlide(parsed - 1, false);
+      }
+    }
+
+    document.querySelector("[data-prev]").addEventListener("click", () => showSlide(current - 1));
+    document.querySelector("[data-next]").addEventListener("click", () => showSlide(current + 1));
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+        event.preventDefault();
+        showSlide(current + 1);
+      }
+      if (event.key === "ArrowLeft" || event.key === "PageUp") {
+        event.preventDefault();
+        showSlide(current - 1);
+      }
+      if (event.key === "Home") {
+        event.preventDefault();
+        showSlide(0);
+      }
+      if (event.key === "End") {
+        event.preventDefault();
+        showSlide(slides.length - 1);
+      }
+    });
+
+    window.addEventListener("resize", fitStage);
+    window.addEventListener("hashchange", fromHash);
+    fitStage();
+    fromHash();
+    showSlide(current, !window.location.hash);
+  </script>
+
+</div>
+</body>
+</html>
