@@ -901,113 +901,130 @@
       font-size: 13px;
     }
 
-    .slide[data-slide="8"] .slide-body {
-      padding-top: 54px;
+    .demo-slide::before {
+      inset: 0;
+      background:
+        radial-gradient(circle at 14% 18%, rgba(31, 119, 255, 0.10), rgba(31, 119, 255, 0) 420px),
+        linear-gradient(180deg, rgba(248, 251, 255, 0.92), rgba(238, 245, 255, 0.92));
     }
 
-    .slide[data-slide="8"] h1 {
-      max-width: 1320px;
-      font-size: 45px;
+    .demo-slide .top-strip,
+    .demo-slide .title-bar {
+      display: none;
     }
 
-    .slide[data-slide="8"] .rule {
-      margin: 24px 0 20px;
+    .demo-slide .slide-body {
+      height: 1080px;
+      padding: 42px 72px 44px;
+    }
+
+    .demo-title {
+      position: relative;
+      z-index: 8;
+      max-width: 960px;
+    }
+
+    .demo-title span {
+      display: inline-flex;
+      margin-bottom: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #edf5ff;
+      color: var(--blue);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .demo-title h1 {
+      max-width: 1040px;
+      color: var(--navy);
+      font-size: 43px;
+      line-height: 1.08;
+      font-weight: 850;
+    }
+
+    .demo-title p {
+      max-width: 860px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.26;
+      font-weight: 650;
     }
 
     .concept-layout {
       position: relative;
-      height: 650px;
       border-radius: 8px;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.52)),
-        #eef5ff;
-      border: 1px solid #cfddf0;
-      box-shadow: var(--shadow-strong);
+      overflow: visible;
+      background: transparent;
     }
 
     .concept-layout.mobile-only {
-      background:
-        radial-gradient(circle at 34% 18%, rgba(31, 119, 255, 0.14), rgba(31, 119, 255, 0) 420px),
-        linear-gradient(180deg, #f7fbff, #eef5ff);
+      position: absolute;
+      inset: 0;
     }
 
     .concept-layout.desktop-only {
-      height: 645px;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.90), rgba(245, 249, 255, 0.80)),
-        #eef5ff;
+      position: absolute;
+      inset: 0;
     }
 
     .concept-desktop-frame {
       position: absolute;
-      right: 34px;
-      top: 38px;
-      width: 1120px;
-      height: 520px;
-      overflow: hidden;
+      overflow: visible;
       border-radius: 8px;
-      background: #ffffff;
-      border: 1px solid rgba(207, 221, 240, 0.88);
-      box-shadow: 0 26px 70px rgba(37, 48, 80, 0.15);
+      background: transparent;
     }
 
     .desktop-only .concept-desktop-frame {
-      left: 54px;
-      right: 54px;
-      top: 50px;
-      width: auto;
-      height: 520px;
+      left: 112px;
+      right: 112px;
+      top: 162px;
+      height: 806px;
     }
 
     .concept-desktop-frame img {
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover;
-      object-position: top center;
+      object-fit: contain;
+      object-position: center center;
+      filter: drop-shadow(0 28px 70px rgba(37, 48, 80, 0.13));
     }
 
     .concept-phone-frame {
       position: absolute;
-      left: 62px;
-      bottom: 28px;
-      width: 360px;
-      height: 590px;
-      padding: 10px;
-      overflow: hidden;
+      overflow: visible;
       border-radius: 30px;
-      background: #ffffff;
-      border: 1px solid rgba(207, 221, 240, 0.92);
-      box-shadow: 0 32px 80px rgba(20, 37, 78, 0.24);
       z-index: 3;
     }
 
     .mobile-only .concept-phone-frame {
-      left: 162px;
-      bottom: 20px;
-      width: 420px;
-      height: 620px;
-      border-radius: 34px;
-      box-shadow: 0 36px 90px rgba(20, 37, 78, 0.28);
+      left: 180px;
+      top: 150px;
+      width: 500px;
+      height: 880px;
     }
 
     .concept-phone-frame img {
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover;
+      object-fit: contain;
       object-position: top center;
-      border-radius: 22px;
+      border-radius: 34px;
+      filter: drop-shadow(0 36px 90px rgba(20, 37, 78, 0.22));
     }
 
     .concept-callout {
       position: absolute;
       z-index: 4;
-      max-width: 290px;
-      padding: 13px 15px;
+      max-width: 330px;
+      padding: 14px 16px;
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.90);
       border: 1px solid #cfe0fb;
       box-shadow: 0 14px 34px rgba(37, 48, 80, 0.12);
       color: var(--navy);
@@ -1041,33 +1058,30 @@
     }
 
     .mobile-only .concept-callout.one {
-      left: 640px;
-      top: 112px;
-      max-width: 360px;
+      left: 1190px;
+      top: 318px;
     }
 
     .mobile-only .concept-callout.two {
-      left: 640px;
+      left: 1190px;
       right: auto;
-      top: 300px;
-      max-width: 380px;
+      top: 454px;
     }
 
     .mobile-only .concept-callout.three {
-      left: 640px;
-      bottom: 126px;
-      max-width: 390px;
+      left: 1190px;
+      bottom: 246px;
     }
 
     .desktop-only .concept-callout.one {
-      left: 86px;
-      top: 582px;
+      left: 116px;
+      bottom: 48px;
       max-width: 450px;
     }
 
     .desktop-only .concept-callout.two {
-      right: 86px;
-      top: 582px;
+      right: 116px;
+      bottom: 48px;
       max-width: 450px;
     }
 
@@ -1077,8 +1091,8 @@
 
     .artifact-links {
       position: absolute;
-      right: 28px;
-      bottom: 22px;
+      right: 72px;
+      top: 44px;
       z-index: 5;
       display: flex;
       align-items: center;
@@ -1109,6 +1123,11 @@
       line-height: 1.1;
       font-weight: 850;
       text-decoration: none;
+    }
+
+    .demo-slide .caption {
+      left: 72px;
+      bottom: 22px;
     }
 
     .routing-board {
@@ -1880,19 +1899,20 @@
         </div>
       </section>
 
-      <section class="slide" data-slide="8">
-        <div class="top-strip"></div>
-        <div class="title-bar">Mobile Express Checkout should feel like a Wallet purchase, not a checkout step</div>
+      <section class="slide demo-slide" data-slide="8">
         <div class="slide-body">
-          <h1><strong>The mobile concept makes the close feel owned by Wallet.</strong> Saved identity, payment and total stay visible until the final action.</h1>
-          <div class="rule"></div>
+          <div class="demo-title">
+            <span>Product demo</span>
+            <h1>Mobile Express Checkout should feel like a Wallet purchase.</h1>
+            <p>Saved identity, delivery, payment and total stay visible until the final action.</p>
+          </div>
           <div class="concept-layout mobile-only">
             <div class="concept-phone-frame">
               <img src="./assets/express-checkout-wallet-mobile.png" alt="Mobile Express Checkout wallet-like concept with saved account, address, shipping, coupon, saved card, total and final purchase CTA">
             </div>
             <div class="concept-callout one"><span>Wallet surface</span>Account, address, shipping and payment read as one saved-data card.</div>
-            <div class="concept-callout two"><span>Purchase clarity</span>The total stays attached to the final action, not buried in a summary.</div>
-            <div class="concept-callout three"><span>Strategic role</span>This is the buyer-facing expression of making EC the default path for recognized users.</div>
+            <div class="concept-callout two"><span>Purchase clarity</span>Total and CTA stay connected.</div>
+            <div class="concept-callout three"><span>Strategic role</span>Buyer-facing proof of EC as the default recognized path.</div>
             <div class="artifact-links">
               <span>Links</span>
               <a href="https://express-checkout-gold.vercel.app/next?footer=off&amp;payFlow=compact&amp;defaults=price-down&amp;escapeSheet=on&amp;preset=nuvem-blue-bottom&amp;header=brand&amp;themeMode=wallet" target="_blank" rel="noreferrer">Prototype</a>
@@ -1905,18 +1925,19 @@
         </div>
       </section>
 
-      <section class="slide" data-slide="9">
-        <div class="top-strip"></div>
-        <div class="title-bar">Desktop Express Checkout should scale the same Wallet logic without copying Core</div>
+      <section class="slide demo-slide" data-slide="9">
         <div class="slide-body">
-          <h1><strong>The desktop concept keeps checkout scannable.</strong> The purchase surface stays simple while the order summary moves into a supporting role.</h1>
-          <div class="rule"></div>
+          <div class="demo-title">
+            <span>Product demo</span>
+            <h1>Desktop Express Checkout should scale the same Wallet logic.</h1>
+            <p>The purchase surface stays simple while the order summary supports the decision.</p>
+          </div>
           <div class="concept-layout desktop-only">
             <div class="concept-desktop-frame">
               <img src="./assets/express-checkout-wallet-desktop.png" alt="Desktop Express Checkout wallet-like concept with one-page checkout and order summary">
             </div>
             <div class="concept-callout one"><span>Same model</span>Saved data stays in the primary purchase column.</div>
-            <div class="concept-callout two"><span>Different viewport</span>Summary supports the decision without taking over the checkout.</div>
+            <div class="concept-callout two"><span>Different viewport</span>The summary supports without taking over.</div>
           </div>
           <div class="caption">Scope note: desktop capture from the same wallet-theme prototype state.</div>
         </div>
