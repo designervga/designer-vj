@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="data:,">
   <title>Wallet Q3 2026 Product Strategy Deck</title>
+  <!-- rev 2026-06-09: EC baseline/target aligned to exec reporting; escape/MP risk added; demo captures cropped -->
+  <!-- rev 2026-06-09b: focus pass — deduped metrics across slides (share of Wallet -> s11 only; NP/PN GPV + EC TBD -> one slide each), trimmed s5 done column, merged P3+pending, path-map cut to 3 nodes/column, removed redundant gate/guardrail items -->
+  <!-- rev 2026-06-10: challenges reframed to match strategy doc — OTP/passkeys dropped as a Q3 challenge (passkeys stays carry-over on s5), login friction split into iOS cross-store and the 12-month persistence window -->
+
   <style>
     @font-face {
       font-family: "Satoshi";
@@ -736,6 +740,15 @@
       text-transform: uppercase;
     }
 
+    .scope-item.pending {
+      background: var(--orange-soft);
+      border-color: #ecd09b;
+    }
+
+    .scope-item.pending span {
+      color: #b9770e;
+    }
+
     .bet-layout {
       margin-top: 28px;
       display: grid;
@@ -1131,6 +1144,335 @@
     .demo-slide .caption {
       left: 72px;
       bottom: 22px;
+    }
+
+    /* --- Demo redesign: device + annotation rail --- */
+    .demo-stage {
+      position: relative;
+      z-index: 6;
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 452px 768px;
+      gap: 84px;
+      justify-content: center;
+      align-items: center;
+      height: 876px;
+    }
+
+    .demo-stage.desktop {
+      grid-template-columns: 1086px 540px;
+      gap: 56px;
+      height: 760px;
+    }
+
+    .device-phone {
+      position: relative;
+      justify-self: center;
+      width: 412px;
+      height: 858px;
+      padding: 14px;
+      border-radius: 54px;
+      background: linear-gradient(158deg, #1d2a4d 0%, #0f1a38 100%);
+      box-shadow: 0 54px 120px rgba(15, 23, 46, 0.34), inset 0 2px 0 rgba(255, 255, 255, 0.16);
+    }
+
+    .device-phone::after {
+      content: "";
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 124px;
+      height: 28px;
+      border-radius: 0 0 16px 16px;
+      background: #0f1a38;
+      z-index: 3;
+    }
+
+    .device-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 42px;
+      overflow: hidden;
+      background: #fcfdff;
+    }
+
+    .device-screen img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .annotation-rail {
+      display: grid;
+      align-content: center;
+      gap: 20px;
+      max-width: 768px;
+    }
+
+    .annotation {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 22px 26px;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .annotation-index {
+      display: grid;
+      place-items: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 13px;
+      background: var(--blue);
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 930;
+    }
+
+    .annotation.teal .annotation-index {
+      background: var(--teal);
+    }
+
+    .annotation.pink .annotation-index {
+      background: var(--pink);
+    }
+
+    .annotation h3 {
+      font-size: 25px;
+      line-height: 1.16;
+      margin-bottom: 7px;
+    }
+
+    .annotation p {
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.36;
+      font-weight: 560;
+    }
+
+    .annotation-foot {
+      margin-top: 4px;
+      padding: 20px 24px;
+      border-radius: 14px;
+      background: #f2f8ff;
+      border: 1px solid #c9ddf5;
+      color: var(--navy);
+      font-size: 19px;
+      line-height: 1.32;
+      font-weight: 760;
+    }
+
+    .annotation-foot strong {
+      color: var(--blue);
+      font-weight: 950;
+    }
+
+    /* Browser frame for desktop demo */
+    .browser-frame {
+      justify-self: center;
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      height: 48px;
+      padding: 0 20px;
+      background: #eef3fa;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .browser-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #cdd7e6;
+    }
+
+    .browser-url {
+      flex: 1;
+      margin-left: 16px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #dce7f5;
+      color: #8893ab;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .browser-screen {
+      height: 660px;
+      overflow: hidden;
+    }
+
+    .browser-screen img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .browser-screen.cmp {
+      height: 470px;
+    }
+
+    .browser-screen.cmp img {
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .demo-stage.compare-desktop {
+      grid-template-columns: 1fr 1fr 292px;
+      gap: 30px;
+      align-items: center;
+      height: 788px;
+    }
+
+    .compare-desktop .compare-col {
+      justify-items: stretch;
+      gap: 14px;
+    }
+
+    .demo-stage.hero {
+      grid-template-columns: 364px 700px;
+      gap: 76px;
+      justify-content: center;
+      align-items: center;
+      height: 786px;
+    }
+
+    /* Mobile before/after comparison */
+    .compare-stage {
+      position: relative;
+      z-index: 6;
+      margin-top: 6px;
+      display: grid;
+      grid-template-columns: auto 58px auto 300px;
+      justify-content: center;
+      align-items: center;
+      gap: 38px;
+      height: 800px;
+    }
+
+    .compare-col {
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+    }
+
+    .compare-tag {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy);
+      font-size: 18px;
+      font-weight: 850;
+    }
+
+    .compare-tag span {
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .compare-tag.now span {
+      background: #fae8f1;
+      color: #b13e6e;
+    }
+
+    .compare-tag.next span {
+      background: #dff7ef;
+      color: #0f8f6e;
+    }
+
+    .compare-arrow {
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+    }
+
+    .compare-arrow svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .device-phone.sm {
+      width: 364px;
+      height: 760px;
+      padding: 12px;
+      border-radius: 48px;
+    }
+
+    .device-phone.sm::after {
+      width: 112px;
+      height: 26px;
+      top: 20px;
+      border-radius: 0 0 15px 15px;
+    }
+
+    .device-phone.sm .device-screen {
+      border-radius: 37px;
+    }
+
+    .delta-rail {
+      display: grid;
+      align-content: center;
+      gap: 12px;
+      max-width: 300px;
+    }
+
+    .delta-card {
+      padding: 15px 17px;
+      border-radius: 11px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.3;
+      font-weight: 620;
+    }
+
+    .delta-card span {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .delta-card.rm span {
+      color: #b13e6e;
+    }
+
+    .delta-card.add span {
+      color: #0f8f6e;
+    }
+
+    .delta-card.gate span {
+      color: var(--blue);
     }
 
     .routing-board {
@@ -1575,11 +1917,11 @@
 
   <div class="viewport">
     <main class="deck" aria-label="Wallet Q3 2026 Product Strategy HTML deck">
-      <!-- Metrics and claims are grounded in outputs/2026-05/strategy/wallet-product-strategy-q3-2026-draft.md, reference/KPIs/wallet-kpis.md, reference/nuvem-context.md, Q2 Wallet strategy PDF, compiled Wallet feature READMEs and Operating Memory problem-memory pages. -->
+      <!-- Metrics and claims are grounded in outputs/2026-05/strategy/wallet-product-strategy-q3-2026.md, reference/KPIs/wallet-kpis.md, reference/nuvem-context.md, Q2 Wallet strategy PDF, compiled Wallet feature READMEs and Operating Memory problem-memory pages. -->
 
       <section class="slide active" data-slide="1">
         <div class="top-strip"></div>
-        <div class="title-bar">Q3 must prove Wallet turns exposure into reliable GMV adoption</div>
+        <div class="title-bar">Q3 must prove recognized checkout creates merchant conversion, not just reach</div>
         <div class="slide-body">
           <h1><strong>The quarter is not about more reach.</strong> It is about proving that recognized checkout creates merchant conversion, GPV concentration and safer adoption at scale.</h1>
           <div class="rule"></div>
@@ -1593,25 +1935,15 @@
                 <div class="ladder-step"><span class="ladder-index">3</span><span>Remove payment friction only when risk and provider contracts are ready.</span></div>
               </div>
             </div>
-            <div class="grid-2">
-              <div class="metric-card green">
-                <span class="value">64%</span>
-                <span class="label">AR transactions completed through Wallet</span>
-                <span class="sub">March to May 2026, +2.5 pp in the Q3 draft.</span>
-              </div>
-              <div class="metric-card">
-                <span class="value">51.8%</span>
-                <span class="label">BR transactions completed through Wallet</span>
-                <span class="sub">March to May 2026, +3.9 pp in the Q3 draft.</span>
-              </div>
+            <div class="grid-2" style="grid-template-columns: 1fr; gap: 26px;">
               <div class="metric-card orange">
-                <span class="value">~8.5%</span>
-                <span class="label">buyers at EC-active NP/PN stores advance through EC</span>
-                <span class="sub">Current Q3 strategy draft denominator: EC-active NP/PN stores.</span>
+                <span class="value">~6%</span>
+                <span class="label">buyers choose Express Checkout today — the gap</span>
+                <span class="sub">All-checkouts base; ~8.5% at EC-active NP/PN stores.</span>
               </div>
               <div class="metric-card pink">
                 <span class="value">+3.13 pp</span>
-                <span class="label">BR saved-card cart approval from no-CVV</span>
+                <span class="label">BR saved-card cart approval from no-CVV — the proof</span>
                 <span class="sub">A/B test among buyers paying with saved card on Nuvem Pago.</span>
               </div>
             </div>
@@ -1637,21 +1969,18 @@
               <div class="market-row">
                 <strong>AR</strong><span>8.5M users</span><span>1.9M cards, 22.8%</span><span>79.1K stores, 88.1%</span>
               </div>
-              <div class="market-row">
-                <strong>MX</strong><span>TBD for consented base</span><span>TBD for saved cards</span><span>8.8K stores, 86.0%</span>
-              </div>
             </div>
             <div class="exposure-card">
               <div class="big">~95%+</div>
-              <p>NP/PN GPV share inside Express Checkout after payment simplification.</p>
-              <span>That makes EC strategically important, but adoption quality must be proven through conversion, not only through more traffic.</span>
+              <p>NP/PN GPV share on EC-initiated orders after payment simplification.</p>
+              <span>Attribution holds even when the buyer exits to Core, so the ~5% residual is mostly exits paying other methods. EC is strategically important, but adoption quality must be proven through conversion, not only through more traffic.</span>
             </div>
           </div>
-          <div class="metric-row">
+          <div class="metric-row" style="grid-template-columns: repeat(3, 1fr);">
             <div class="metric-card">
               <span class="value">~82.6%</span>
               <span class="label">global Wallet login rate</span>
-              <span class="sub">Current draft baseline.</span>
+              <span class="sub">Documented baseline; June refresh pending.</span>
             </div>
             <div class="metric-card orange">
               <span class="value">~32.76%</span>
@@ -1663,13 +1992,8 @@
               <span class="label">1-tap share in NP/PN stores</span>
               <span class="sub">Jan 2026 KPI file, Wallet orders in NP/PN stores.</span>
             </div>
-            <div class="metric-card pink">
-              <span class="value">TBD</span>
-              <span class="label">EC started-to-paid conversion</span>
-              <span class="sub">Requires completed and exited EC instrumentation.</span>
-            </div>
           </div>
-          <div class="caption">Scope note: May 2026 strict-consent and merchant snapshots, Jan-Mar 2026 KPI baselines, and Q3 EC readouts.</div>
+          <div class="caption">Scope note: May 2026 strict-consent and merchant snapshots, Jan-Mar 2026 KPI baselines, and Q3 EC readouts. MX omitted: consented-base and saved-card data pending.</div>
         </div>
       </section>
 
@@ -1684,9 +2008,9 @@
               <h2>User-facing friction</h2>
               <div class="debt-list">
                 <div class="debt-item">CVV adds 34 seconds and invalid CVV explains 1.3% of saved-card payment failures.</div>
-                <div class="debt-item">Most BR and AR buyers still rely on OTP to log in.</div>
                 <div class="debt-item">EC must feel like a final checkout, with clear total, CTA and saved-data confidence.</div>
-                <div class="debt-item">Cross-store login on iOS needs a first-party Nuvem path.</div>
+                <div class="debt-item">The 12-month session window pushes returning buyers back to OTP, while second-year repurchase stays high (70.3% AR, 49.9% BR over 0-24m).</div>
+                <div class="debt-item">Cross-store login on iOS breaks and needs a first-party Nuvem path.</div>
               </div>
             </div>
             <div class="decision-flow">
@@ -1724,14 +2048,14 @@
                 <div class="workstream-item">Risk-based 1-tap without CVV</div>
                 <div class="workstream-item">Single primary checkout CTA</div>
                 <div class="workstream-item">Wallet-like EC UI with sticky final CTA</div>
-                <div class="workstream-item">Saved-data confidence and payment state clarity</div>
+                <div class="workstream-item">Saved-data microcopy and payment UI states</div>
               </div>
             </div>
             <div class="workstream-card platform">
               <h2>Merchant and platform enablement</h2>
               <p>Make Wallet useful across store contexts without claiming ownership of every Core Checkout capability.</p>
               <div class="workstream-list">
-                <div class="workstream-item">Passwordless storefront login across themes</div>
+                <div class="workstream-item">Passwordless storefront login across themes (pending decision)</div>
                 <div class="workstream-item">Checkout identity provider path</div>
                 <div class="workstream-item">EC eligibility, NubeSDK and app readiness</div>
                 <div class="workstream-item">Observable fallback to Core when EC is not the right path</div>
@@ -1767,11 +2091,9 @@
             <div class="scope-column done">
               <div class="scope-head">Done or closing</div>
               <div class="scope-items">
-                <div class="scope-item"><span>Proof</span>No-CVV approval uplift validated in BR and AR.</div>
+                <div class="scope-item"><span>Proof</span>No-CVV uplift proven in BR; AR directional, test not clean.</div>
                 <div class="scope-item"><span>EC</span>Lightweight EC and NP/PN-only options near rollout.</div>
-                <div class="scope-item"><span>Fast path</span>Autocomplete fail rate cut from 4.4% to about 1%.</div>
                 <div class="scope-item"><span>Security</span>Critical authentication and order-access risks closed.</div>
-                <div class="scope-item"><span>Identity</span>iOS cross-store login persistence path shipped.</div>
               </div>
             </div>
             <div class="scope-column carry">
@@ -1789,7 +2111,7 @@
                 <div class="scope-item"><span>P0</span>1-tap without CVV for low-risk saved cards.</div>
                 <div class="scope-item"><span>P1</span>One checkout CTA, routed by buyer context.</div>
                 <div class="scope-item"><span>P2</span>Wallet-like EC UI: CTA, total, summary and theme.</div>
-                <div class="scope-item"><span>P3</span>Passwordless storefront login, priority still to confirm.</div>
+                <div class="scope-item pending"><span>P3 · Pending decision</span>Passwordless storefront login (Wallet as identity provider for the store account). Candidate to move to Q4: high effort across Checkout and all themes; value accrues to Nuvemshop more than to Wallet CVR.</div>
               </div>
             </div>
             <div class="scope-column no">
@@ -1821,7 +2143,7 @@
                 </div>
                 <div class="proof-metric">
                   <strong>~+4 pp</strong>
-                  <span>AR Pago Nube approval lift, enough to stop extending the test.</span>
+                  <span>AR Pago Nube lift, directional only: test contaminated by an installments bug.</span>
                 </div>
                 <div class="proof-metric">
                   <strong>34s</strong>
@@ -1840,7 +2162,6 @@
                 <div class="gate-item"><strong>User-facing fallback:</strong> if antifraud needs CVV, Wallet asks after the payment attempt instead of creating a silent rejection path.</div>
                 <div class="gate-item"><strong>Provider contract:</strong> installments, authorization state and PSP payloads must reconcile with UI and internal records.</div>
                 <div class="gate-item"><strong>Delayed guardrail:</strong> chargebacks lag 30 to 90 days, so scale needs staged exposure, issuer/acquirer monitoring and a kill switch.</div>
-                <div class="gate-item"><strong>Readout discipline:</strong> approval, fraud, retries and generic rejection buckets are separate signals.</div>
               </div>
             </div>
           </div>
@@ -1860,43 +2181,35 @@
               <div class="path-node">Recognized buyer at cart sees one primary checkout action.</div>
               <div class="path-node">Logged-out buyer remains in Core first.</div>
               <div class="path-node">Buyer who logs in from Core can move into EC when eligible.</div>
-              <div class="path-node">iOS cross-store persistence uses first-party Nuvem domain.</div>
             </div>
             <div class="path-stage win">
               <h2>Wallet-owned close</h2>
               <div class="path-node">Saved address and payment open above the fold on mobile.</div>
               <div class="path-node">Sticky final CTA shows total and purchase confidence.</div>
               <div class="path-node">No-CVV and installment defaults remove form work when risk allows.</div>
-              <div class="path-node">NP/PN rails remain the dominant payment path inside EC.</div>
             </div>
             <div class="path-stage foundation">
               <h2>Fallback logic</h2>
               <div class="path-node">Unsupported capability routes to Core with preserved cart state.</div>
+              <div class="path-node">Escape to Core stays visible at payment: EC is NP/PN-only and Mercado Pago holds ~21% of AR orders.</div>
               <div class="path-node">Fallback reason is observable before it pollutes adoption metrics.</div>
-              <div class="path-node">EC eligibility is store, cart, user, app and PSP specific.</div>
-              <div class="path-node">Conversion guardrail decides whether defaulting expands.</div>
             </div>
           </div>
-          <div class="metric-row">
+          <div class="metric-row" style="grid-template-columns: repeat(3, 1fr);">
             <div class="metric-card orange">
-              <span class="value">~8.5%</span>
-              <span class="label">current EC usage in Q3 draft</span>
-              <span class="sub">Buyers at EC-active NP/PN stores advancing through EC.</span>
+              <span class="value">~6%</span>
+              <span class="label">current EC usage</span>
+              <span class="sub">All-checkouts base; ~8.5% at EC-active NP/PN stores.</span>
             </div>
             <div class="metric-card">
-              <span class="value">~40%</span>
+              <span class="value">35-40%</span>
               <span class="label">Q3 ambition for EC usage</span>
               <span class="sub">Target to validate through single primary checkout CTA.</span>
-            </div>
-            <div class="metric-card green">
-              <span class="value">~95%+</span>
-              <span class="label">NP/PN GPV share inside EC</span>
-              <span class="sub">Post payment simplification baseline.</span>
             </div>
             <div class="metric-card pink">
               <span class="value">TBD</span>
               <span class="label">EC started-to-paid conversion</span>
-              <span class="sub">Measurement gap to close before reading defaulting quality.</span>
+              <span class="sub">Completion event live on new-EC stores; exit reason still missing.</span>
             </div>
           </div>
         </div>
@@ -1905,44 +2218,94 @@
       <section class="slide demo-slide" data-slide="8">
         <div class="slide-body">
           <div class="demo-title">
-            <span>Product demo</span>
-            <h1>Mobile Express Checkout should feel like a Wallet purchase.</h1>
-            <p>Saved identity, delivery, payment and total stay visible until the final action.</p>
+            <span>Product demo · Before / after</span>
+            <h1>From a payment form to a recognized wallet close.</h1>
+            <p>Same cart, same buyer. The Q3 concept removes the form work the current Express Checkout still asks for at payment.</p>
           </div>
-          <div class="concept-layout mobile-only">
-            <div class="concept-phone-frame">
-              <img src="./assets/express-checkout-wallet-mobile.png" alt="Mobile Express Checkout wallet-like concept with saved account, address, shipping, coupon, saved card, total and final purchase CTA">
+          <div class="artifact-links">
+            <span>Links</span>
+            <a href="https://express-checkout-gold.vercel.app/next?footer=off&amp;payFlow=compact&amp;defaults=price-down&amp;escapeSheet=on&amp;preset=nuvem-blue-bottom&amp;header=brand&amp;themeMode=wallet" target="_blank" rel="noreferrer">Prototype</a>
+            <a href="../../../../reference/PRDs/Wallet/Pitch_%20Lightweight%20Express%20Checkout%202026.pdf">PRD</a>
+            <a href="../../../2026-05/strategy/wallet-product-strategy-q3-2026-draft.md">Strategy</a>
+            <a href="../../../../reference/Compiled%20Features/Wallet/lightweight-express-checkout/README.md">Feature</a>
+          </div>
+          <div class="demo-stage compare-desktop">
+            <div class="compare-col">
+              <div class="compare-tag now"><span>Hoje · Q2</span> Current Express Checkout</div>
+              <div class="browser-frame">
+                <div class="browser-bar">
+                  <span class="browser-dot"></span>
+                  <span class="browser-dot"></span>
+                  <span class="browser-dot"></span>
+                  <span class="browser-url">nuvem.com.br / express · pagamento</span>
+                </div>
+                <div class="browser-screen cmp">
+                  <img src="./assets/express-checkout-q2-desktop-crop.png" alt="Current Q2 Express Checkout with saved card, installment dropdown, a CVV field and an Alterar forma de pagamento link at the payment step">
+                </div>
+              </div>
             </div>
-            <div class="concept-callout one"><span>Wallet surface</span>Account, address, shipping and payment read as one saved-data card.</div>
-            <div class="concept-callout two"><span>Purchase clarity</span>Total and CTA stay connected.</div>
-            <div class="concept-callout three"><span>Strategic role</span>Buyer-facing proof of EC as the default recognized path.</div>
-            <div class="artifact-links">
-              <span>Links</span>
-              <a href="https://express-checkout-gold.vercel.app/next?footer=off&amp;payFlow=compact&amp;defaults=price-down&amp;escapeSheet=on&amp;preset=nuvem-blue-bottom&amp;header=brand&amp;themeMode=wallet" target="_blank" rel="noreferrer">Prototype</a>
-              <a href="../../../../reference/PRDs/Wallet/Pitch_%20Lightweight%20Express%20Checkout%202026.pdf">PRD</a>
-              <a href="../../../2026-05/strategy/wallet-product-strategy-q3-2026-draft.md">Strategy</a>
-              <a href="../../../../reference/Compiled%20Features/Wallet/lightweight-express-checkout/README.md">Feature</a>
+            <div class="compare-col">
+              <div class="compare-tag next"><span>Conceito · Q3</span> Wallet-like close</div>
+              <div class="browser-frame">
+                <div class="browser-bar">
+                  <span class="browser-dot"></span>
+                  <span class="browser-dot"></span>
+                  <span class="browser-dot"></span>
+                  <span class="browser-url">nuvem.com.br / express · nuvem express</span>
+                </div>
+                <div class="browser-screen cmp">
+                  <img src="./assets/express-checkout-wallet-desktop-crop.png" alt="Q3 wallet-like Express Checkout concept with one purchase column, no CVV field, saved card and a single final purchase action">
+                </div>
+              </div>
+            </div>
+            <div class="delta-rail">
+              <div class="delta-card rm"><span>Removed</span>CVV field, installment dropdown and "Alterar forma de pagamento".</div>
+              <div class="delta-card add"><span>Added</span>Recognized saved data and a sticky total connected to one final action.</div>
+              <div class="delta-card gate"><span>Risk-gated</span>CVV is asked after the attempt only when antifraud requires it.</div>
             </div>
           </div>
-          <div class="caption">Scope note: prototype capture from the wallet theme URL shared for this deck iteration.</div>
+          <div class="caption">Scope note: both are real captures. Left is the current Q2 Express Checkout; right is the Q3 wallet-theme prototype.</div>
         </div>
       </section>
 
       <section class="slide demo-slide" data-slide="9">
         <div class="slide-body">
           <div class="demo-title">
-            <span>Product demo</span>
-            <h1>Desktop Express Checkout should scale the same Wallet logic.</h1>
-            <p>The purchase surface stays simple while the order summary supports the decision.</p>
+            <span>Product demo · Mobile</span>
+            <h1>On mobile, the close reads as one recognized block.</h1>
+            <p>Saved identity, delivery and payment stay together, with the total connected to a single final action.</p>
           </div>
-          <div class="concept-layout desktop-only">
-            <div class="concept-desktop-frame">
-              <img src="./assets/express-checkout-wallet-desktop.png" alt="Desktop Express Checkout wallet-like concept with one-page checkout and order summary">
+          <div class="demo-stage hero">
+            <div class="device-phone sm">
+              <div class="device-screen">
+                <img src="./assets/express-checkout-wallet-mobile.png" alt="Q3 wallet-like Express Checkout concept on mobile with recognized saved account, address, shipping, saved card and a sticky total connected to a single final purchase action">
+              </div>
             </div>
-            <div class="concept-callout one"><span>Same model</span>Saved data stays in the primary purchase column.</div>
-            <div class="concept-callout two"><span>Different viewport</span>The summary supports without taking over.</div>
+            <div class="annotation-rail">
+              <div class="annotation">
+                <span class="annotation-index">1</span>
+                <div>
+                  <h3>One recognized block</h3>
+                  <p>Account, address, shipping and saved card are recognized at entry, not retyped into a form.</p>
+                </div>
+              </div>
+              <div class="annotation teal">
+                <span class="annotation-index">2</span>
+                <div>
+                  <h3>Total and CTA stay connected</h3>
+                  <p>A sticky final action with the visible total removes the closing ambiguity Baymard ties to up to 11% mobile abandonment.</p>
+                </div>
+              </div>
+              <div class="annotation pink">
+                <span class="annotation-index">3</span>
+                <div>
+                  <h3>No form at payment</h3>
+                  <p>Saved card with installment preselected and no CVV field; CVV is asked after the attempt only when antifraud requires it.</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="caption">Scope note: desktop capture from the same wallet-theme prototype state.</div>
+          <div class="caption">Scope note: wallet-theme prototype capture shared for this deck iteration.</div>
         </div>
       </section>
 
@@ -2001,78 +2364,34 @@
             <div class="proof-lane">
               <span>Proof 1</span>
               <h2>Conversion improves without hiding friction.</h2>
-              <p>No-CVV approval holds beyond tests, while EC started-to-paid conversion becomes instrumented instead of inferred.</p>
+              <p>No-CVV approval holds beyond tests, while EC started-to-paid conversion is read from the new completion event instead of inferred.</p>
             </div>
             <div class="proof-lane">
               <span>Proof 2</span>
               <h2>Adoption grows with completion quality.</h2>
-              <p>EC moves from the ~8.5% draft read toward the ~40% ambition only if fallback reasons and NP/PN mix stay healthy.</p>
+              <p>EC moves from ~6% toward the 35-40% ambition only if fallback reasons, exit-to-Core and NP/PN mix stay healthy.</p>
             </div>
             <div class="proof-lane">
               <span>Proof 3</span>
               <h2>Foundations are ready before scale.</h2>
-              <p>Login persistence, OTP pressure, provider contracts, TMX, Neblina and monitoring become rollout gates.</p>
+              <p>Login persistence, OTP pressure, provider contracts and risk decisioning become rollout gates.</p>
             </div>
           </div>
           <div class="north-guardrail">
             <h2>Do not declare North Star impact until the guardrails hold.</h2>
-            <div class="guardrail-grid">
+            <div class="guardrail-grid" style="grid-template-columns: repeat(3, 1fr);">
               <div class="guardrail-item"><span>Merchant CVR</span>AR 1-2%, BR 2-3% goal still to prove.</div>
               <div class="guardrail-item"><span>Share of Wallet</span>AR 64%, BR 51.8% should not be raw exposure.</div>
               <div class="guardrail-item"><span>Risk lag</span>Chargebacks and fraud need 30-90d monitoring.</div>
-              <div class="guardrail-item"><span>Boundary</span>No-go list stays protected as EC scales.</div>
             </div>
           </div>
           <div class="caption">Scope note: targets are Q3 ambitions or goals from the strategy draft, not forecasts. TBD marks measurement gaps that must be closed.</div>
         </div>
       </section>
 
-      <section class="slide" data-slide="12">
-        <div class="top-strip"></div>
-        <div class="title-bar">Decision: approve the scope, protect the no-gos, and measure readiness before scale</div>
-        <div class="slide-body">
-          <h1><strong>The alignment ask is not "ship everything."</strong> It is to approve the few bets that can prove Wallet's merchant value and keep the default path honest.</h1>
-          <div class="rule"></div>
-          <div class="decision-board">
-            <div class="decision-card">
-              <h2>Approve</h2>
-              <p>Q3 should lead with no-CVV, single primary checkout CTA and EC UI as the conversion bets.</p>
-              <div class="decision-lines">
-                <div class="decision-line">Passwordless remains enablement.</div>
-                <div class="decision-line">Foundations stay attached to rollout gates.</div>
-              </div>
-            </div>
-            <div class="decision-card">
-              <h2>Protect</h2>
-              <p>Do not expand EC ownership into every Core Checkout edge case by default.</p>
-              <div class="decision-lines">
-                <div class="decision-line">No-gos remain explicit.</div>
-                <div class="decision-line">Unsupported cases route intentionally.</div>
-              </div>
-            </div>
-            <div class="decision-card">
-              <h2>Measure</h2>
-              <p>Read leading proof before declaring Merchant CVR Uplift.</p>
-              <div class="decision-lines">
-                <div class="decision-line">EC usage plus started-to-paid conversion.</div>
-                <div class="decision-line">No-CVV quality plus fallback reasons.</div>
-              </div>
-            </div>
-            <div class="decision-card">
-              <h2>Trade off</h2>
-              <p>Defaulting EC increases strategic leverage and operational risk at the same time.</p>
-              <div class="decision-lines">
-                <div class="decision-line">If conversion does not hold, route back.</div>
-                <div class="decision-line">If risk is not ready, no-CVV stays staged.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <div class="controls" aria-label="Slide controls">
         <button type="button" data-prev aria-label="Previous slide">&lt;</button>
-        <div class="counter" aria-live="polite">1 / 12</div>
+        <div class="counter" aria-live="polite">1 / 11</div>
         <button type="button" data-next aria-label="Next slide">&gt;</button>
       </div>
     </main>
