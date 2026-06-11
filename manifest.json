@@ -63,17 +63,17 @@
     "updated_at": "2026-06-06T12:22:30Z"
   },
   {
-    "slug": "consumer-app-q3-strategy-deck-v2",
-    "title": "Consumer App Q3 Strategy Deck v2",
-    "url": "https://designervga.github.io/designer-vj/artifacts/consumer-app-q3-strategy-deck-v2/",
-    "date": "09/06/2026",
-    "updated_at": "2026-06-09T14:23:43Z"
-  },
-  {
     "slug": "wallet-q3-strategy-deck",
     "title": "Wallet Q3 2026 Product Strategy Deck",
     "url": "https://designervga.github.io/designer-vj/artifacts/wallet-q3-strategy-deck/",
     "date": "11/06/2026",
     "updated_at": "2026-06-11T13:27:19Z"
+  },
+  {
+    "slug": "consumer-app-q3-strategy-deck-v2",
+    "title": "Consumer App Q3 Strategy Deck v2",
+    "url": "https://designervga.github.io/designer-vj/artifacts/consumer-app-q3-strategy-deck-v2/",
+    "date": "11/06/2026",
+    "updated_at": "2026-06-11T13:27:32Z"
   }
 ]

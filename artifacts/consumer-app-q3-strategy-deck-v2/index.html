@@ -1826,7 +1826,7 @@
                 <div class="workstream-item">Abandoned Cart</div>
                 <div class="workstream-item">Recently Viewed Products</div>
                 <div class="workstream-item">First-purchase Coupons</div>
-                <div class="workstream-item">Push and in-app recovery</div>
+                <div class="workstream-item">Push notification recovery</div>
               </div>
             </div>
             <div class="workstream-card low">
@@ -1834,10 +1834,9 @@
               <h2 style="margin-top: 18px;">Low Intent Discovery</h2>
               <p>Create new demand through ranked cross-store recommendations, social proof, decision content, and merchant supply.</p>
               <div class="workstream-list">
-                <div class="workstream-item">Deals and Store Referral</div>
-                <div class="workstream-item">Related Products and Favorite Stores</div>
-                <div class="workstream-item">Product Reviews and Product Clips</div>
                 <div class="workstream-item">Ranking and personalization V0</div>
+                <div class="workstream-item">Deals (Brand Recommendation) and Store Referral</div>
+                <div class="workstream-item">Related Products and Favorite Stores</div>
               </div>
             </div>
           </div>
@@ -1937,7 +1936,7 @@
               </div>
               <div class="card" style="background: #f5fff3;">
                 <h2>Ranking becomes the bottleneck.</h2>
-                <p class="body-note" style="margin-top: 12px;">Deals, Favorite Stores, Reviews, Clips, coupons, and Related Products only work if the user trusts the recommendation.</p>
+                <p class="body-note" style="margin-top: 12px;">Deals, Favorite Stores, coupons, and Related Products only work if the user trusts the recommendation.</p>
               </div>
               <div class="callout-box">
                 The strategic shift is not launching more shopping surfaces. It is <strong>proving matching quality</strong> across the inventory we can now surface.
@@ -1964,7 +1963,7 @@
                 <div class="path-item">Reach 60% to 70% of eligible high-intent users; 75% stretch.</div>
                 <div class="path-item">Lift CTR +20%; +30% stretch.</div>
                 <div class="path-item">Lift click-to-purchase +10% to +15%; +20% stretch.</div>
-                <div class="path-item">Grow recovery +30% to +50%: +240 to +700 orders/wk. Recently Viewed pool ~5x cart.</div>
+                <div class="path-item">Push reaches ~92K users/month with open carts (~1.8M active devices); ~2.8K recovered carts/month at near-zero cost. Recently Viewed pool ~5x cart.</div>
               </div>
             </div>
             <div class="path-card generate" style="min-height: 380px;">
@@ -2046,7 +2045,7 @@
                 <div class="scope-item"><span class="scope-tag">Must ship</span>App download from pending-payment orders as an adoption lever, not a GMV lever by itself.</div>
                 <div class="scope-item"><span class="scope-tag">Must ship</span>Tracking-event fallback from web scraping to improve post-sale confidence and reduce uninstall pressure.</div>
                 <div class="scope-item"><span class="scope-tag">Must ship</span>Attribution split: same-store repeat, Store Referral, Related Products, Deals, and new-to-store.</div>
-                <div class="scope-item"><span class="scope-tag conditional">Conditional</span>Consumer reactivation only if measurement tags and opt-out guardrails are ready.</div>
+                <div class="scope-item"><span class="scope-tag">Must ship</span>Consumer re-install campaign, gated on measurement tags and opt-out guardrails.</div>
               </div>
             </div>
             <div class="scope-column high">
@@ -2054,7 +2053,7 @@
               <div class="scope-items">
                 <div class="scope-item"><span class="scope-tag">Must ship</span>Abandoned Cart and Recently Viewed Products as high-intent return paths.</div>
                 <div class="scope-item"><span class="scope-tag">Must ship</span>First-purchase Coupons for stores where the user has never bought.</div>
-                <div class="scope-item"><span class="scope-tag">Must ship</span>Push or in-app recovery with product image and store-specific reason to act.</div>
+                <div class="scope-item"><span class="scope-tag">Must ship</span>Push notification recovery with product image and store-specific reason to act.</div>
                 <div class="scope-item"><span class="scope-tag conditional">Conditional</span>Recovery channel expansion only if click-to-purchase and opt-out guardrails hold.</div>
               </div>
             </div>
@@ -2062,9 +2061,8 @@
               <div class="scope-head">Low Intent Discovery</div>
               <div class="scope-items">
                 <div class="scope-item"><span class="scope-tag">Must ship</span>Ranking V0 with score version, reason code, and outcome logging.</div>
-                <div class="scope-item"><span class="scope-tag">Must ship</span>Deals pilot with merchant opt-in and direct-to-store handoff.</div>
+                <div class="scope-item"><span class="scope-tag">Must ship</span>Deals (Brand Recommendation) pilot with merchant opt-in and direct-to-store handoff.</div>
                 <div class="scope-item"><span class="scope-tag">Must ship</span>Rank Store Referral, Related Products, and Favorite Stores using the same primitives.</div>
-                <div class="scope-item"><span class="scope-tag conditional">Conditional</span>Product Reviews and Product Clips when they improve click-to-purchase quality.</div>
               </div>
             </div>
             <div class="scope-column no">
@@ -2074,6 +2072,7 @@
                 <div class="scope-item"><span class="scope-tag conditional">No-go</span>Full Personal Shopper as a committed Q3 build.</div>
                 <div class="scope-item"><span class="scope-tag conditional">No-go</span>Wallet Identity Memory as a standalone Q3 roadmap item.</div>
                 <div class="scope-item"><span class="scope-tag conditional">No-go</span>Marketplace-like catalog expansion before relevance is proven.</div>
+                <div class="scope-item"><span class="scope-tag conditional">No-go</span>Product Clips, Product Reviews and Store Proof Signals; revisit if ranked surfaces lift CTR but conversion on recommended products still lags.</div>
               </div>
             </div>
           </div>
@@ -2165,7 +2164,7 @@
 
       <section class="slide" data-slide="9">
         <div class="top-strip"></div>
-        <div class="title-bar">Deals is the Q3 pilot for low-intent new demand</div>
+        <div class="title-bar">Deals (Brand Recommendation) is the Q3 pilot for low-intent new demand</div>
         <div class="slide-body">
           <h1>Deals is a bounded experiment: <strong>merchants opt in, Nuvem ranks by relevance, and users return to merchant storefronts</strong>.</h1>
           <div class="rule"></div>
@@ -2198,7 +2197,7 @@
         <div class="top-strip"></div>
         <div class="title-bar">The concept design turns the strategy into app surfaces</div>
         <div class="slide-body">
-          <h1>The same product primitives become concrete surfaces: <strong>Recently Viewed, first-purchase coupons, rated offers, Deals, and image-rich recovery</strong>.</h1>
+          <h1>The same product primitives become concrete surfaces: <strong>Recently Viewed, first-purchase coupons, Deals, and image-rich recovery</strong>.</h1>
           <div class="rule"></div>
           <div class="concept-board">
             <div class="concept-panel">
@@ -2233,7 +2232,6 @@
                     <div class="mini-product-body">
                       <span class="mini-store">Amica Mia</span>
                       <span>Golden Bracelet</span>
-                      <div class="rating-row"><span class="star">&#9733;</span> 4.7 · 9</div>
                       <span class="mini-price">R$ 39,90</span>
                     </div>
                   </div>
@@ -2243,7 +2241,6 @@
                     <div class="mini-product-body">
                       <span class="mini-store">Saint Germain</span>
                       <span>Classic Watch</span>
-                      <div class="rating-row"><span class="star">&#9733;</span> 4.8 · 12</div>
                       <span class="mini-price">R$ 149,90</span>
                     </div>
                   </div>
